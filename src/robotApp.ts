@@ -1,14 +1,17 @@
-import express from 'express';
+import Input from './Input/Input'
+import {IProcessor} from './Processor/Processor'
 
 class RobotApp {
-    public app: express.Application;
-    public port: number;
+    greeting: string;
+    processor: IProcessor;
 
+    constructor(processor: IProcessor) {
+        this.processor = processor;
+    }
 
-    public listen() {
-        this.app.listen(this.port, () => {
-            console.log(`App listening on the port ${this.port}`);
-        });
+    start() {
+        Input.GetInput(this.processor);
+        return "Hello, " + this.greeting;
     }
 }
 

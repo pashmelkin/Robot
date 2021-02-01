@@ -1,13 +1,12 @@
 import {MoveRobot} from "./MoveRobot";
 
-interface IProcessor {
-    MoveRobot: () => any
+export interface IProcessor {
+    MoveRobot: (command: string) => any
 
 };
 
 
-const Processor: IProcessor = {
+export const Processor: IProcessor = {
     MoveRobot : MoveRobot
 };
 
-export default Processor;
