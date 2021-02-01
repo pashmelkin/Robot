@@ -2,10 +2,13 @@
   "name": "ToyRobot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/app.ts"
+    "prebuild": "rm -rf dist/*",
+    "build": "tsc && cp -rf package.json dist/package.json",
+    "prestart": "npm run build",
+    "start": "node src/app",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",

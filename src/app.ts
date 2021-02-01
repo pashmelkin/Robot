@@ -1,19 +1,28 @@
 import dotenv from 'dotenv';
-import express from 'express';
+
+
+
+import * as readline from 'readline';
 
 dotenv.config({
     path: '.env'
 });
 
+let rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
-class Server {
-    public app = express();
-}
-
-// initialize server app
-const server = new Server();
-
-// make server listen on some port
-((port = process.env.APP_PORT || 4000) => {
-    server.app.listen(port, () => console.log(`> Listening on port ${port}`));
-})();
+rl.question('Is this example useful? [y/n] ', (answer) => {
+    switch(answer.toLowerCase()) {
+        case 'y':
+            console.log('Super!');
+            break;
+        case 'n':
+            console.log('Sorry! :(');
+            break;
+        default:
+            console.log('Invalid answer!');
+    }
+    rl.close();
+});
