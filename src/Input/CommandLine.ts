@@ -13,4 +13,4 @@ export function read() {
             console.log("received:" + answer);
         }
     }
-}
+};

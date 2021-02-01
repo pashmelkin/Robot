@@ -1,6 +1,6 @@
 import RobotApp from './robotApp'
 
 
-const app = new RobotApp();
+const app = new RobotApp("Pavel");
+app.start();
 
-app.listen();
