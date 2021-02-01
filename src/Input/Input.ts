@@ -1,7 +1,8 @@
 import {read} from "./CommandLine";
+import {IProcessor} from "../Processor/Processor";
 
 interface IInput {
-    GetInput: () => any
+    GetInput: (output: IProcessor) => any
 
 };
 

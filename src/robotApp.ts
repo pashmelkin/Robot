@@ -1,14 +1,16 @@
 import Input from './Input/Input'
+import {IProcessor} from './Processor/Processor'
 
 class RobotApp {
     greeting: string;
+    processor: IProcessor;
 
-    constructor(message: string) {
-        this.greeting = message;
+    constructor(processor: IProcessor) {
+        this.processor = processor;
     }
 
     start() {
-        Input.GetInput();
+        Input.GetInput(this.processor);
         return "Hello, " + this.greeting;
     }
 }
