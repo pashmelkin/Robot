@@ -1,7 +1,6 @@
 import RobotApp from './robotApp'
-import {Processor} from "./Processor/Processor";
 
 
-const app = new RobotApp(new Processor());
+const app = new RobotApp();
 app.start();
 

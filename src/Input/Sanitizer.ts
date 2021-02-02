@@ -1,6 +1,8 @@
+import ISanitizer from "./ISanitizer";
 
-
-export function sanitize(input: string): string {
-    return input.toLocaleUpperCase();
-
-};
+export default class Sanitizer implements ISanitizer{
+    Sanitize(input: string) : string
+    {
+        return input.toLocaleUpperCase();
+    }
+}

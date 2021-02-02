@@ -1,17 +1,15 @@
-import Input from './Input/Input'
-import {IProcessor} from './Processor/Processor'
+import InputReader from "./Input/InputReader";
 
 class RobotApp {
-    greeting: string;
-    processor: IProcessor;
 
-    constructor(processor: IProcessor) {
-        this.processor = processor;
+    private prompt: string = "What is the robot command, please: => ";
+    private inputReader: InputReader;
+    constructor() {
+        this.inputReader = new InputReader();
     }
 
     start() {
-        Input.GetInput(this.processor);
-        return "Hello, " + this.greeting;
+
     }
 }
 
