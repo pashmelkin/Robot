@@ -1,11 +1,7 @@
 import {GetLocation} from './GetLocation';
 import {SetLocation} from './SetLocation';
 import {ILocation} from "../models/Interfaces/ILocation";
-
-interface IRepository {
-    GetLocation: () => string
-    Move: () => any
-};
+import {IRepository} from "./IRepository";
 
 
 export class Repository implements IRepository {

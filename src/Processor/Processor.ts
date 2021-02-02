@@ -1,16 +1,13 @@
 import {MoveRobot} from "./MoveRobot";
 import {Repository} from "../Repository/Repository";
-
-export interface IProcessor {
-    MoveRobot: (command: string) => string
-
-};
+import {IProcessor} from "./IProcessor";
+import {IRepository} from "../Repository/IRepository";
 
 
 export class Processor implements IProcessor {
     repository: Repository;
 
-    constructor(){
+    constructor(repository : IRepository){
         this.repository = new Repository();
     }
 
