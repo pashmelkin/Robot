@@ -1,12 +1,23 @@
 import {MoveRobot} from "./MoveRobot";
-
-export interface IProcessor {
-    MoveRobot: (command: string) => string
-
-};
+import {Repository} from "../Repository/Repository";
+import {IProcessor} from "./IProcessor";
+import {IRepository} from "../Repository/IRepository";
 
 
-export const Processor: IProcessor = {
-    MoveRobot : MoveRobot
+export class Processor implements IProcessor {
+    repository: Repository;
+
+    constructor(repository : IRepository){
+        this.repository = new Repository();
+    }
+
+    MoveRobot (command: string)
+    {
+        let res = this.repository.GetLocation();
+        console.log("GetLocation returned::" + res);
+        return MoveRobot(command);
+    }
+
+
 };
 

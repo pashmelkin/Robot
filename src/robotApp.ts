@@ -1,17 +1,17 @@
-import Input from './Input/Input'
-import {IProcessor} from './Processor/Processor'
+import InputReader from "./Input/InputReader";
+import Sanitizer from "./Input/Sanitizer";
 
 class RobotApp {
-    greeting: string;
-    processor: IProcessor;
 
-    constructor(processor: IProcessor) {
-        this.processor = processor;
+    private readonly prompt: string = "What is the robot command, please: => ";
+    private inputReader: InputReader;
+    constructor() {
+        this.inputReader = new InputReader(this.prompt, new Sanitizer());
     }
 
     start() {
-        Input.GetInput(this.processor);
-        return "Hello, " + this.greeting;
+        let res = this.inputReader.read();
+        console.log("Read: " + res );
     }
 }
 
