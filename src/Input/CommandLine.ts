@@ -12,7 +12,8 @@ export function read(output : IProcessor) {
         } else {
 
             console.log("received:" + answer);
-            output.MoveRobot(answer);
+            let res = output.MoveRobot(answer);
+            console.log(res);
         }
     }
 };

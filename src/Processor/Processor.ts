@@ -1,7 +1,7 @@
 import {MoveRobot} from "./MoveRobot";
 
 export interface IProcessor {
-    MoveRobot: (command: string) => any
+    MoveRobot: (command: string) => string
 
 };
 
