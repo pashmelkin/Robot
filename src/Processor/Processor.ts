@@ -2,6 +2,7 @@ import {IProcessor} from "./IProcessor";
 import {IRepository} from "../Repository/IRepository";
 import {Commands} from "../models/Commands";
 import {RobotLocation} from "../models/RobotLocation";
+import {BoardSides} from "../models/BoardSides";
 
 
 export class Processor implements IProcessor {
@@ -17,44 +18,45 @@ export class Processor implements IProcessor {
     {
         let result = "";
         let currLocation = this.repository.GetLocation();
-        console.log("GetLocation returned::" + currLocation);
 
-        if (command.startsWith(Commands.PLACE) && currLocation === undefined)
+        const params = command.split(" ");
+        const commandName = params[0];
+        if (commandName !== Commands.PLACE && currLocation === undefined)
         {
-            let r = new RegExp("\\d+ \\d+ \\w+");
-            let result = command.match(r);
-            let newLocation = new RobotLocation(parseInt(result[0]), parseInt(result[0]), result[2]);
-            console.log("Found:" + result);
-            this.repository.SetLocation(newLocation);
+            return "Not ready to move!";
         }
-        else
-        {
-            switch (command) {
-                case Commands.PLACE: {
+
+        switch (commandName) {
+            case Commands.PLACE: {
+                const direction: BoardSides = BoardSides[params[3]];
+                const newLocation = new RobotLocation ( parseInt ( params[1] ) , parseInt ( params[2] ) , direction );
+                this.repository.SetLocation ( newLocation );
+
+                break;
+                }
+            case Commands.LEFT: {
                     break;
                 }
-                case Commands.LEFT: {
-                    break;
-                }
-                case Commands.RIGHT: {
+            case Commands.RIGHT: {
                     //statements;
                     break;
                 }
-                case Commands.MOVE: {
+            case Commands.MOVE: {
                     //statements;
                     break;
                 }
-                case Commands.REPORT: {
-                    result = this.repository.GetLocation().direction;
-                    console.log(result);
-                    break;
+            case Commands.REPORT: {
+                const destination: string = BoardSides[currLocation.direction];
+                result = `${currLocation.x} ${currLocation.y} ${destination}`;
+                console.log ( result );
+                break;
                 }
-                default: {
-                    console.log("Unknown command received");
+            default: {
+                    console.log ( "Unknown command received" );
                     break;
                 }
             }
-        }
+
 
 
         return result;

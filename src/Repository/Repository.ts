@@ -17,7 +17,7 @@ export class Repository implements IRepository {
 
     SetLocation (location: RobotLocation) {
         this.location = location;
-        console.log("SetLosation: direction: " + this.location.direction);
+        console.log("SetLocation: direction: " + this.location.direction);
     }
 
 };
