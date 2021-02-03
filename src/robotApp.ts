@@ -25,6 +25,7 @@ class RobotApp {
             }
             this.moveProcessor.MoveRobot (command);
         }
+        console.log("bye for now...");
     }
 }
 

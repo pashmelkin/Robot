@@ -10,11 +10,14 @@ export class Repository implements IRepository {
         this.location = location;
     }
     GetLocation() {
+        if (this.location !== undefined)
+            console.log("GetLocation: direction: " + this.location.direction);
         return this.location;
     }
 
     SetLocation (location: RobotLocation) {
         this.location = location;
+        console.log("SetLosation: direction: " + this.location.direction);
     }
 
 };
