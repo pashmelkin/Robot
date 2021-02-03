@@ -3,8 +3,9 @@ import {Repository} from "../../Repository/Repository";
 
 describe('Repository', function() {
     it('Repository function returns something',  function () {
-        const result = new Repository(undefined);
-        expect(result).toBe('Successfully moved');
+        const repo = new Repository(undefined);
+        let result = repo.GetLocation();
+        expect(result).toBe(undefined);
     });
 
 });

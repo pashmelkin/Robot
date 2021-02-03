@@ -12,15 +12,15 @@ export default class Sanitizer implements ISanitizer{
                                                    ${BoardSides.WEST}|${BoardSides.SOUTH}`);
         const regexSimpleCommands =
             new RegExp( `${Commands.LEFT}|${Commands.REPORT}|
-                                 ${Commands.RIGHT}|${Commands.MOVE}`);
+                                 ${Commands.RIGHT}|${Commands.MOVE}` + "$");
 
         if(command.startsWith(Commands.PLACE)){
             if(!regexPlace.test(command)) {
-                console.log ( "Wrong Place command format" );
+                console.log ( "Sanitize: Wrong Place command format" );
                 return "";
             }
         } else if(!regexSimpleCommands.test(command)){
-            console.log("Unknown command!!");
+            console.log("Sanitize: Unknown command!!");
             return "";
         }
 
