@@ -1,10 +1,10 @@
-//import {sanitize} from "../../Input/Sanitizer";
+import Sanitizer from "../../Input/Sanitizer";
 
-describe('Sanitize', function() {
+describe('Sanitizer', function() {
     it('Sanitize function returns sanitized string',  function () {
-        //const result = sanitize("Move 1 2 3");
-        //expect(result).toBe('Move my robot');
-
+        let sanitizer = new Sanitizer();
+        let result = sanitizer.Sanitize("Move it");
+        expect(result).toBe('MOVE IT');
     });
 
 });

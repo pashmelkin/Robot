@@ -1,4 +1,4 @@
-export interface ILocation
+export class RobotLocation
 {
     direction: string;
     x: number;

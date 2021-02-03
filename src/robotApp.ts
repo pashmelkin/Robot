@@ -1,20 +1,19 @@
 import InputReader from "./Input/InputReader";
 import Sanitizer from "./Input/Sanitizer";
-import {IProcessor} from "./Processor/IProcessor";
 import {Processor} from "./Processor/Processor";
-import {IRepository} from "./Repository/IRepository";
+import {Repository} from "./Repository/Repository";
 
 class RobotApp {
 
     private readonly prompt: string = "What is the robot command, please: => ";
     private readonly exitCommand = "EXIT";
     private readonly inputReader: InputReader;
-    private readonly moveProcessor: IProcessor;
-    private readonly repository : IRepository;
+    private readonly moveProcessor: Processor;
 
     constructor() {
         this.inputReader = new InputReader(this.prompt, new Sanitizer());
-        this.moveProcessor = new Processor(this.repository);
+        let repository = new Repository(undefined);
+        this.moveProcessor = new Processor(repository);
     }
 
     start() {

@@ -1,24 +1,21 @@
-import {GetLocation} from './GetLocation';
-import {SetLocation} from './SetLocation';
-import {ILocation} from "../models/Interfaces/ILocation";
+import {RobotLocation} from "../models/RobotLocation";
 import {IRepository} from "./IRepository";
 
 
 export class Repository implements IRepository {
-    location: ILocation;
-    constructor()
+
+    private location : RobotLocation;
+    constructor(location: RobotLocation)
     {
-        //this.location = new ILocation("direction", 0, 0);
+        this.location = location;
     }
-    Move ()
-    {
-        SetLocation();
+    GetLocation() {
+        return this.location;
     }
 
-    GetLocation (): string
-    {
-        return GetLocation();
+    SetLocation (location: RobotLocation) {
+        this.location = location;
     }
 
-}
+};
 

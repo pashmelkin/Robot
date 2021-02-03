@@ -1,4 +1,6 @@
+import {RobotLocation} from "../models/RobotLocation";
+
 export interface IRepository {
-    GetLocation: () => string
-    Move: () => any
+    GetLocation: () => RobotLocation
+    SetLocation: (location: RobotLocation) => void
 };
