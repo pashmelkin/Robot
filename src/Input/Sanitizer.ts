@@ -1,19 +1,29 @@
 import ISanitizer from "./ISanitizer";
 import {BoardSides} from "../models/BoardSides";
+import {Commands} from "../models/Commands";
 
 export default class Sanitizer implements ISanitizer{
     Sanitize(input: string) : string
     {
 
         const command = input.toLocaleUpperCase();
-        /*const regex =
+        const regexPlace =
             new RegExp( "\\d+ \\d+ " +`${BoardSides.NORTH}|${BoardSides.EAST}|
                                                    ${BoardSides.WEST}|${BoardSides.SOUTH}`);
+        const regexSimpleCommands =
+            new RegExp( `${Commands.LEFT}|${Commands.REPORT}|
+                                 ${Commands.RIGHT}|${Commands.MOVE}` + "$");
 
-        if(!regex.test(command)){
-            console.log("wrong direction!!");
+        if(command.startsWith(Commands.PLACE)){
+            if(!regexPlace.test(command)) {
+                console.log ( "Sanitize: Wrong Place command format" );
+                return "";
+            }
+        } else if(!regexSimpleCommands.test(command)){
+            console.log("Sanitize: Unknown command!!");
             return "";
-        }*/
+        }
+
         return command;
     }
 }

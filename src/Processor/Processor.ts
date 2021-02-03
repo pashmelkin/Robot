@@ -7,8 +7,6 @@ import {BoardSides} from "../models/BoardSides";
 
 export class Processor implements IProcessor {
     repository: IRepository;
-    private readonly result = "Successfully moved";
-
 
     constructor(repository: IRepository){
         this.repository = repository;
@@ -17,7 +15,7 @@ export class Processor implements IProcessor {
     public MoveRobot (command: string) : string
     {
         let result = "";
-        let currLocation = this.repository.GetLocation();
+        let currLocation = this.repository?.GetLocation();
 
         const params = command.split(" ");
         const commandName = params[0];
