@@ -3,13 +3,17 @@ import {IRepository} from "../Repository/IRepository";
 import {Commands} from "../models/Commands";
 import {RobotLocation} from "../models/RobotLocation";
 import {BoardSides} from "../models/BoardSides";
+import {MoveDefines} from "../Configuration/MoveDefines";
+import {MoveDefines2} from "../Configuration/MoveDefines2";
 
 
 export class Processor implements IProcessor {
     repository: IRepository;
+    moveDefines : MoveDefines2;
 
     constructor(repository: IRepository){
         this.repository = repository;
+        this.moveDefines = new MoveDefines2();
     }
 
     public MoveRobot (command: string) : string
@@ -40,7 +44,8 @@ export class Processor implements IProcessor {
                 break;
                 }
             case Commands.LEFT: {
-                if(currDirection === BoardSides.NORTH){
+                this.moveDefines.GetNextSide(Commands.LEFT, newDirection);
+                /*if(currDirection === BoardSides.NORTH){
                     newDirection = BoardSides.WEST;
                 }
                 else if( currDirection === BoardSides.WEST){
@@ -51,7 +56,7 @@ export class Processor implements IProcessor {
                 }
                 else if ( currDirection === BoardSides.EAST){
                     newDirection = BoardSides.NORTH;
-                }
+                }*/
 
                     break;
                 }
