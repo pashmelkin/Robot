@@ -16,6 +16,13 @@ export class Processor implements IProcessor {
     {
         let result = "";
         let currLocation = this.repository?.GetLocation();
+        let currDirection = currLocation?.direction;
+        let currX = currLocation?.x;
+        let currY = currLocation?.y;
+
+        let newDirection = currDirection;
+        let newX = currX;
+        let newY = currY;
 
         const params = command.split(" ");
         const commandName = params[0];
@@ -26,21 +33,58 @@ export class Processor implements IProcessor {
 
         switch (commandName) {
             case Commands.PLACE: {
-                const direction: BoardSides = BoardSides[params[3]];
-                const newLocation = new RobotLocation ( parseInt ( params[1] ) , parseInt ( params[2] ) , direction );
-                this.repository.SetLocation ( newLocation );
+                newDirection = BoardSides[params[3]];
+                newX = parseInt ( params[1] );
+                newY = parseInt ( params[2] );
 
                 break;
                 }
             case Commands.LEFT: {
+                if(currDirection === BoardSides.NORTH){
+                    newDirection = BoardSides.WEST;
+                }
+                else if( currDirection === BoardSides.WEST){
+                    newDirection = BoardSides.SOUTH;
+                }
+                else if( currDirection === BoardSides.SOUTH){
+                    newDirection = BoardSides.WEST;
+                }
+                else if ( currDirection === BoardSides.EAST){
+                    newDirection = BoardSides.NORTH;
+                }
+
                     break;
                 }
             case Commands.RIGHT: {
-                    //statements;
-                    break;
+                if(currDirection === BoardSides.NORTH){
+                    newDirection = BoardSides.EAST;
+                }
+                else if( currDirection === BoardSides.WEST){
+                    newDirection = BoardSides.NORTH;
+                }
+                else if( currDirection === BoardSides.SOUTH){
+                    newDirection = BoardSides.EAST;
+                }
+                else if ( currDirection === BoardSides.EAST){
+                    newDirection = BoardSides.SOUTH;
+                }
+
+
+                break;
                 }
             case Commands.MOVE: {
-                    //statements;
+                if(currDirection === BoardSides.NORTH){
+                    newY--;
+                }
+                else if( currDirection === BoardSides.WEST){
+                    newX ++;
+                }
+                else if( currDirection === BoardSides.SOUTH){
+                    newY++;
+                }
+                else if ( currDirection === BoardSides.EAST){
+                    newY--;
+                }
                     break;
                 }
             case Commands.REPORT: {
@@ -50,13 +94,13 @@ export class Processor implements IProcessor {
                 break;
                 }
             default: {
-                    console.log ( "Unknown command received" );
-                    break;
+                console.log ( "Unknown command received" );
+                break;
                 }
             }
-
-
-
+        if (commandName !== Commands.REPORT) {
+            this.repository.SetLocation ( new RobotLocation ( newX , newY , newDirection ) );
+        }
         return result;
     }
 

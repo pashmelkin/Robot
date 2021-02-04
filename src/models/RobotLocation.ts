@@ -6,7 +6,6 @@ export class RobotLocation
        this.x = x;
        this.y = y;
        this.direction = direction;
-       console.log("Consrta: " + this.x + " " + this.direction)
     }
 
     x: number;

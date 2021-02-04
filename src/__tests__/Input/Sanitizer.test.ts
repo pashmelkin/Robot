@@ -36,3 +36,12 @@ describe('Sanitizer', function() {
     });
 
 });
+
+describe('Sanitizer', function() {
+    it('Sanitize function returns empty string if wrong Place command',  function () {
+        let sanitizer = new Sanitizer();
+        let result = sanitizer.Sanitize("Place 1 2 South");
+        expect(result).toBe("PLACE 1 2 SOUTH");
+    });
+
+});
