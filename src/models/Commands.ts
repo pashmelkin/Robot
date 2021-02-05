@@ -1,7 +1,7 @@
 export enum Commands {
-    PLACE = "PLACE",
-    MOVE = "MOVE",
-    LEFT = "LEFT",
-    RIGHT = "RIGHT",
-    REPORT = "REPORT"
+    PLACE = 'PLACE',
+    MOVE = 'MOVE',
+    LEFT = 'LEFT',
+    RIGHT = 'RIGHT',
+    REPORT = 'REPORT',
 }

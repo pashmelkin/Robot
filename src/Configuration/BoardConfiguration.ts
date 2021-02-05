@@ -1,6 +1,6 @@
 import { load } from 'ts-dotenv';
 
-export class BoardConfiguration{
+export class BoardConfiguration {
     get width(): number {
         return this._width;
     }
@@ -9,9 +9,9 @@ export class BoardConfiguration{
     }
 
     constructor() {
-        const env = load( {
-            LENGTH: Number ,
-            WIDTH: Number
+        const env = load({
+            LENGTH: Number,
+            WIDTH: Number,
         });
 
         this._length = env.LENGTH;
