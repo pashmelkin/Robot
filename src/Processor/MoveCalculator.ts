@@ -13,16 +13,16 @@ export class MoveCalculator{
 
         let error : string = undefined;
         let newLocation : RobotLocation = location;
-        if(location.direction === BoardSides.EAST && location.x > 0){
-            newLocation.x--;
-        }
-        else if(location.direction === BoardSides.WEST && location.x < this.boardSize.width ){
+        if(location.direction === BoardSides.EAST && location.x < this.boardSize.width - 1){
             newLocation.x++;
         }
-        else if(location.direction === BoardSides.NORTH && location.y < this.boardSize.length ){
+        else if(location.direction === BoardSides.WEST && location.x > 1 ){
+            newLocation.x--;
+        }
+        else if(location.direction === BoardSides.NORTH && location.y < this.boardSize.length - 1 ){
             newLocation.y++;
         }
-        else if(location.direction === BoardSides.SOUTH && location.y > 0  ){
+        else if(location.direction === BoardSides.SOUTH && location.y > 1  ){
             newLocation.y--;
         }
         else
@@ -30,11 +30,11 @@ export class MoveCalculator{
         return {location: newLocation, error};
     }
 
-    IsPlacementLegimite (location : RobotLocation) : boolean {
+    IsPlacementLegimit (location : RobotLocation) : boolean {
         let result = true;
         if (location.x >= this.boardSize.width ||
             location.y >= this.boardSize.length ||
-            location.x <= 0 || location.y < 0 )
+            location.x < 0 || location.y < 0 )
         {
             result = false;
         }
