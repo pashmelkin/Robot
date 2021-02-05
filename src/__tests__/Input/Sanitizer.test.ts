@@ -19,7 +19,7 @@ describe('Sanitizer', function() {
 });
 
 describe('Sanitizer', function() {
-    it('Sanitize function returns correct result if correct Place command',  function () {
+    it('Sanitize function returns correct side if correct Place command',  function () {
         let sanitizer = new Sanitizer();
         let result = sanitizer.Sanitize("Place 1 2 NORTH");
         expect(result).toBe("PLACE 1 2 NORTH");

@@ -26,7 +26,8 @@ class RobotApp {
             if (command.includes(this.exitCommand)){
                 break;
             }
-            this.moveProcessor.MoveRobot (command);
+            let result = this.moveProcessor.MoveRobot (command);
+            console.log(`${result}`);
         }
         console.log("bye for now...");
     }

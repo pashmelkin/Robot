@@ -9,7 +9,7 @@ export class Calculator{
         this.boardSize = new BoardConfiguration(5 ,5);
     }
 
-    Move(location: RobotLocation): {newLocation: RobotLocation, error: string} {
+    Move(location: RobotLocation): {location: RobotLocation, error: string} {
 
         let error : string = '';
         let newLocation : RobotLocation = location;
@@ -27,19 +27,20 @@ export class Calculator{
         }
         else
             error = "Robot will fall off the board.";
-        return {newLocation, error};
+        return {location: newLocation, error};
     }
 
-    IsPlacementLegimite (location : RobotLocation) : {result : boolean, error?: string} {
+    IsPlacementLegimite (location : RobotLocation) : boolean {
         let result = true;
-        let error: string = "";
         if (location.x >= this.boardSize.width ||
             location.y >= this.boardSize.length ||
             location.x <= 0 || location.y < 0 )
         {
-            error = 'Invalid placement location value';
+
             result = false;
+            console.log(`wrong placement: ${location.x} ${location.y}`);
+            console.log(`board size: ${this.boardSize.width} ${this.boardSize.length}`);
         }
-            return {result, error};
+            return result;
     }
 }

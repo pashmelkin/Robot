@@ -3,17 +3,19 @@ import {IRepository} from "../Repository/IRepository";
 import {Commands} from "../models/Commands";
 import {RobotLocation} from "../models/RobotLocation";
 import {BoardSides} from "../models/BoardSides";
-import {MoveDefines} from "../Configuration/MoveDefines";
-import {MoveDefines2} from "../Configuration/MoveDefines2";
+import {SideHelper} from "../Configuration/SideHelper";
+import {Calculator} from "./Calculator";
 
 
 export class Processor implements IProcessor {
     repository: IRepository;
-    moveDefines : MoveDefines2;
+    sideHelper : SideHelper;
+    moveCalculator: Calculator;
 
     constructor(repository: IRepository){
         this.repository = repository;
-        this.moveDefines = new MoveDefines2();
+        this.sideHelper = new SideHelper();
+        this.moveCalculator = new Calculator();
     }
 
     public MoveRobot (command: string) : string
@@ -37,65 +39,36 @@ export class Processor implements IProcessor {
 
         switch (commandName) {
             case Commands.PLACE: {
-                newDirection = BoardSides[params[3]];
-                newX = parseInt ( params[1] );
-                newY = parseInt ( params[2] );
+                const direction = BoardSides[params[3]];
+                const x = parseInt ( params[1] );
+                const y = parseInt ( params[2] );
 
+                if (this.moveCalculator.IsPlacementLegimite(new RobotLocation(x, y, direction ))){
+                    newX = x;
+                    newY = y;
+                    newDirection = direction;
+                }
                 break;
                 }
-            case Commands.LEFT: {
-                this.moveDefines.GetNextSide(Commands.LEFT, newDirection);
-                /*if(currDirection === BoardSides.NORTH){
-                    newDirection = BoardSides.WEST;
-                }
-                else if( currDirection === BoardSides.WEST){
-                    newDirection = BoardSides.SOUTH;
-                }
-                else if( currDirection === BoardSides.SOUTH){
-                    newDirection = BoardSides.WEST;
-                }
-                else if ( currDirection === BoardSides.EAST){
-                    newDirection = BoardSides.NORTH;
-                }*/
-
-                    break;
-                }
+            case Commands.LEFT:
             case Commands.RIGHT: {
-                if(currDirection === BoardSides.NORTH){
-                    newDirection = BoardSides.EAST;
+                const sideRes = this.sideHelper.GetNextSide(commandName, currDirection);
+                if (sideRes.error === "") {
+                    newDirection = sideRes.side;
                 }
-                else if( currDirection === BoardSides.WEST){
-                    newDirection = BoardSides.NORTH;
-                }
-                else if( currDirection === BoardSides.SOUTH){
-                    newDirection = BoardSides.EAST;
-                }
-                else if ( currDirection === BoardSides.EAST){
-                    newDirection = BoardSides.SOUTH;
-                }
-
-
                 break;
                 }
             case Commands.MOVE: {
-                if(currDirection === BoardSides.NORTH){
-                    newY--;
-                }
-                else if( currDirection === BoardSides.WEST){
-                    newX ++;
-                }
-                else if( currDirection === BoardSides.SOUTH){
-                    newY++;
-                }
-                else if ( currDirection === BoardSides.EAST){
-                    newY--;
-                }
-                    break;
+               const moveRes = this.moveCalculator.Move(currLocation);
+               if (moveRes.error === "") {
+                   newY = moveRes.location.y;
+                   newX = moveRes.location.x;
+               }
+               break;
                 }
             case Commands.REPORT: {
                 const destination: string = BoardSides[currLocation.direction];
                 result = `${currLocation.x} ${currLocation.y} ${destination}`;
-                console.log ( result );
                 break;
                 }
             default: {
