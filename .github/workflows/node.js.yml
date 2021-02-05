@@ -1,4 +1,4 @@
-name: Node.js CI
+name: TypeScript CI
 
 on:
   push:
@@ -15,12 +15,5 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup node
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }}
-      - name: Install dependencies
-        run: npm install
-      - name: Run unit __tests__
-        id: unittests
-        run: npm t
+      - name: Typescript compiler
+          uses: iCrawl/action-tsc@v1
