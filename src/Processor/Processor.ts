@@ -39,7 +39,11 @@ export class Processor implements IProcessor {
         switch (commandName) {
             case Commands.PLACE: {
                 const x = parseInt ( params[1] );
+                if (isNaN(x))
+                    return `Wrong Place command parameter: ${params[1]}`;
                 const y = parseInt ( params[2] );
+                if (isNaN(y))
+                    return `Wrong Place command parameter: ${params[2]}`;
                 const direction = BoardSides[params[3]];
 
                 if (this.moveCalculator.IsPlacementLegimite ( new RobotLocation ( x , y , direction ) )) {
@@ -47,7 +51,7 @@ export class Processor implements IProcessor {
                     newY = y;
                     newDirection = direction;
                 } else
-                    return "Wrong Place command parameters."
+                    return "Wrong Place command parameters.";x
                 break;
             }
             case Commands.LEFT:

@@ -13,7 +13,7 @@ describe('Sanitizer', function() {
     it('Sanitize function returns error in case the command is wrong',  function () {
         let sanitizer = new Sanitizer();
         let result = sanitizer.Sanitize("Move it");
-        expect(result).toBe('');
+        expect(result).toBe(undefined);
     });
 
 });
@@ -32,7 +32,7 @@ describe('Sanitizer', function() {
     it('Sanitize function returns empty string if wrong Place command',  function () {
         let sanitizer = new Sanitizer();
         let result = sanitizer.Sanitize("Place 1 2");
-        expect(result).toBe("");
+        expect(result).toBe(undefined);
     });
 
 });
