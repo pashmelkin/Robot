@@ -1,11 +1,19 @@
 import {BoardConfiguration} from "../../../Configuration/BoardConfiguration";
+import {load} from "ts-dotenv";
 
 describe('BoardConfiguration', function() {
     let config : BoardConfiguration;
-    const length: number = 4;
-    const width: number = 3;
+    let length: number;
+    let width: number;
     beforeEach(() => {
-        config = new BoardConfiguration(length, width);;
+        config = new BoardConfiguration();
+        const env = load( {
+            LENGTH: Number ,
+            WIDTH: Number
+        });
+
+        length = env.LENGTH;
+        width = env.WIDTH;
     });
     it('BoardConfiguration is defined, width is returned correctly',  function () {
         expect(config.width).toEqual(width);

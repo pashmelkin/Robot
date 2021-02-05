@@ -6,7 +6,7 @@ export class MoveCalculator{
     private readonly boardSize: BoardConfiguration;
 
     constructor(){
-        this.boardSize = new BoardConfiguration(5 ,5);
+        this.boardSize = new BoardConfiguration();
     }
 
     Move(location: RobotLocation): {location: RobotLocation, error: string} {
