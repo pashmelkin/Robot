@@ -1,14 +1,13 @@
-import IReader from "./IReader";
-import {readCli} from "./CommandLine";
-import ISanitizer from "./ISanitizer";
+import IReader from './IReader';
+import { readCli } from './CommandLine';
+import ISanitizer from './ISanitizer';
 
-export default class InputReader implements IReader{
+export default class InputReader implements IReader {
     private readonly prompt: string;
-    private readonly sanitizer : ISanitizer;
-    constructor(prompt: string , sanitizer: ISanitizer)
-    {
+    private readonly sanitizer: ISanitizer;
+    constructor(prompt: string, sanitizer: ISanitizer) {
         this.prompt = prompt;
-        this.sanitizer = sanitizer
+        this.sanitizer = sanitizer;
     }
 
     read(): string {

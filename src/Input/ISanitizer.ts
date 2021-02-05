@@ -1,3 +1,3 @@
 export default interface ISanitizer {
-    Sanitize: (input: string) => string
-};
+    Sanitize: (input: string) => string;
+}

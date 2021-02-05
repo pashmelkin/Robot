@@ -1,6 +1,6 @@
-import {RobotLocation} from "../models/RobotLocation";
+import { RobotLocation } from '../models/RobotLocation';
 
 export interface IRepository {
-    GetLocation: () => RobotLocation
-    SetLocation: (location: RobotLocation) => void
-};
+    GetLocation: () => RobotLocation;
+    SetLocation: (location: RobotLocation) => void;
+}
