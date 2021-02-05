@@ -23,7 +23,7 @@ export class SideHelper {
     {
         let projection = `${currSide}${command}`;
         let side : BoardSides;
-        let error: string = "";
+        let error: string = undefined;
 
         if(this.myMap.has(projection)) {
             side = this.myMap.get(projection);

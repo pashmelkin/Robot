@@ -15,11 +15,11 @@ export default class Sanitizer implements ISanitizer{
         if(command.startsWith(Commands.PLACE)){
             if(!regexPlace.test(command)) {
                 console.log ( "Sanitize: Wrong Place command format" );
-                return "";
+                return undefined;
             }
         } else if(!regexSimpleCommands.test(command)){
             console.log("Sanitize: Unknown command:" + command);
-            return "";
+            return undefined;
         }
 
         return command;

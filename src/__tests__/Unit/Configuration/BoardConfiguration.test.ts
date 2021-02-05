@@ -1,4 +1,4 @@
-import {BoardConfiguration} from "../../Configuration/BoardConfiguration";
+import {BoardConfiguration} from "../../../Configuration/BoardConfiguration";
 
 describe('BoardConfiguration', function() {
     let config : BoardConfiguration;

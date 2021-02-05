@@ -1,4 +1,4 @@
-import Sanitizer from "../../Input/Sanitizer";
+import Sanitizer from "../../../Input/Sanitizer";
 
 describe('Sanitizer', function() {
     it('Sanitize function returns sanitized string',  function () {

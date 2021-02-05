@@ -1,7 +1,7 @@
-import {Processor} from "../../Processor/Processor";
-import {RobotLocation} from "../../models/RobotLocation";
-import {BoardSides} from "../../models/BoardSides";
-import {Repository} from "../../Repository/Repository";
+import {Processor} from "../../../Processor/Processor";
+import {RobotLocation} from "../../../models/RobotLocation";
+import {BoardSides} from "../../../models/BoardSides";
+import {Repository} from "../../../Repository/Repository";
 
 describe('Processor', function() {
     it('Processor function returns error if no repo defined',  function () {

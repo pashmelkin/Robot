@@ -1,4 +1,4 @@
-import {Repository} from "../../Repository/Repository";
+import {Repository} from "../../../Repository/Repository";
 
 
 describe('Repository', function() {

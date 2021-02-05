@@ -11,6 +11,6 @@ export class BoardConfiguration{
         this._width = width;
     }
 
-    private _length: number;
-    private _width: number;
+    private readonly _length: number;
+    private readonly _width: number;
 }

@@ -20,14 +20,17 @@ class RobotApp {
     }
 
     start() {
-
+        let result : string = undefined;
         while(true) {
             let command = this.inputReader.read ();
             if (command.includes(this.exitCommand)){
                 break;
             }
-            let result = this.moveProcessor.MoveRobot (command);
-            console.log(`${result}`);
+            if (command !== undefined) {
+                result = this.moveProcessor.MoveRobot ( command );
+            }
+            if (result !== undefined)
+                console.log(`${result}`);
         }
         console.log("bye for now...");
     }

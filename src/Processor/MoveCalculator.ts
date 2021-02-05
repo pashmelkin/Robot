@@ -2,7 +2,7 @@ import {BoardConfiguration} from "../Configuration/BoardConfiguration";
 import {RobotLocation} from "../models/RobotLocation";
 import {BoardSides} from "../models/BoardSides";
 
-export class Calculator{
+export class MoveCalculator{
     private readonly boardSize: BoardConfiguration;
 
     constructor(){
@@ -11,7 +11,7 @@ export class Calculator{
 
     Move(location: RobotLocation): {location: RobotLocation, error: string} {
 
-        let error : string = '';
+        let error : string = undefined;
         let newLocation : RobotLocation = location;
         if(location.direction === BoardSides.EAST && location.x > 0){
             newLocation.x--;
@@ -36,10 +36,7 @@ export class Calculator{
             location.y >= this.boardSize.length ||
             location.x <= 0 || location.y < 0 )
         {
-
             result = false;
-            console.log(`wrong placement: ${location.x} ${location.y}`);
-            console.log(`board size: ${this.boardSize.width} ${this.boardSize.length}`);
         }
             return result;
     }
