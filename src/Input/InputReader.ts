@@ -5,10 +5,10 @@ import ISanitizer from "./ISanitizer";
 export default class InputReader implements IReader{
     private readonly prompt: string;
     private readonly sanitizer : ISanitizer;
-    constructor(_prompt: string , _sanitizer: ISanitizer)
+    constructor(prompt: string , sanitizer: ISanitizer)
     {
-        this.prompt = _prompt;
-        this.sanitizer = _sanitizer
+        this.prompt = prompt;
+        this.sanitizer = sanitizer
     }
 
     read(): string {

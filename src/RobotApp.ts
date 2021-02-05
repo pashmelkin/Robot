@@ -7,7 +7,6 @@ import {BoardConfiguration} from "./Configuration/BoardConfiguration";
 class RobotApp {
 
     private readonly prompt: string = "What is the robot command, please: => ";
-    private readonly exitCommand = "EXIT";
     private readonly inputReader: InputReader;
     private readonly moveProcessor: Processor;
     private readonly boardConfiguration: BoardConfiguration;
@@ -16,16 +15,14 @@ class RobotApp {
         this.inputReader = new InputReader(this.prompt, new Sanitizer());
         let repository = new Repository(undefined);
         this.moveProcessor = new Processor(repository);
-        this.boardConfiguration = new BoardConfiguration(5, 5);
+        this.boardConfiguration = new BoardConfiguration();
     }
 
     start() {
         let result : string = undefined;
         while(true) {
             let command = this.inputReader.read ();
-            if (command.includes(this.exitCommand)){
-                break;
-            }
+
             if (command !== undefined) {
                 result = this.moveProcessor.MoveRobot ( command );
             }

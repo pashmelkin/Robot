@@ -46,7 +46,7 @@ export class Processor implements IProcessor {
                     return `Wrong Place command parameter: ${params[2]}`;
                 const direction = BoardSides[params[3]];
 
-                if (this.moveCalculator.IsPlacementLegimite ( new RobotLocation ( x , y , direction ) )) {
+                if (this.moveCalculator.IsPlacementLegimit ( new RobotLocation ( x , y , direction ) )) {
                     newX = x;
                     newY = y;
                     newDirection = direction;
