@@ -1,4 +1,4 @@
-import RobotApp from './robotApp'
+import RobotApp from './RobotApp'
 
 
 const app = new RobotApp();

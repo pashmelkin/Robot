@@ -1,6 +1,6 @@
 export enum BoardSides {
     NORTH = "NORTH",
-    SOUTH = "SOUTH",
-    EAST = "EAST",
+    SOUTH = "EAST",
+    EAST = "SOUTH",
     WEST = "WEST"
 }

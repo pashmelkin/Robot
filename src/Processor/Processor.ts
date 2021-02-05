@@ -3,61 +3,87 @@ import {IRepository} from "../Repository/IRepository";
 import {Commands} from "../models/Commands";
 import {RobotLocation} from "../models/RobotLocation";
 import {BoardSides} from "../models/BoardSides";
+import {SideHelper} from "../Configuration/SideHelper";
+import {MoveCalculator} from "./MoveCalculator";
 
 
 export class Processor implements IProcessor {
     repository: IRepository;
+    sideHelper : SideHelper;
+    moveCalculator: MoveCalculator;
 
     constructor(repository: IRepository){
         this.repository = repository;
+        this.sideHelper = new SideHelper();
+        this.moveCalculator = new MoveCalculator();
     }
 
     public MoveRobot (command: string) : string
     {
-        let result = "";
         let currLocation = this.repository?.GetLocation();
+        let currDirection = currLocation?.direction;
+        let currX = currLocation?.x;
+        let currY = currLocation?.y;
+
+        let newDirection = currDirection;
+        let newX = currX;
+        let newY = currY;
 
         const params = command.split(" ");
         const commandName = params[0];
         if (commandName !== Commands.PLACE && currLocation === undefined)
         {
-            return "Not ready to move!";
+            return "Not ready to move. Please put the Place command first.";
         }
 
         switch (commandName) {
             case Commands.PLACE: {
-                const direction: BoardSides = BoardSides[params[3]];
-                const newLocation = new RobotLocation ( parseInt ( params[1] ) , parseInt ( params[2] ) , direction );
-                this.repository.SetLocation ( newLocation );
+                const x = parseInt ( params[1] );
+                if (isNaN(x))
+                    return `Wrong Place command parameter: ${params[1]}`;
+                const y = parseInt ( params[2] );
+                if (isNaN(y))
+                    return `Wrong Place command parameter: ${params[2]}`;
+                const direction = BoardSides[params[3]];
 
+                if (this.moveCalculator.IsPlacementLegimite ( new RobotLocation ( x , y , direction ) )) {
+                    newX = x;
+                    newY = y;
+                    newDirection = direction;
+                } else
+                    return "Wrong Place command parameters.";x
                 break;
-                }
-            case Commands.LEFT: {
-                    break;
-                }
+            }
+            case Commands.LEFT:
             case Commands.RIGHT: {
-                    //statements;
-                    break;
+                const sideRes = this.sideHelper.GetNextSide ( commandName , currDirection );
+                if (sideRes.error === undefined) {
+                    newDirection = sideRes.side;
                 }
+                break;
+            }
             case Commands.MOVE: {
-                    //statements;
-                    break;
+                const moveRes = this.moveCalculator.Move ( currLocation );
+                if (moveRes.error === undefined) {
+                    newY = moveRes.location.y;
+                    newX = moveRes.location.x;
                 }
+            }
+               break;
             case Commands.REPORT: {
                 const destination: string = BoardSides[currLocation.direction];
-                result = `${currLocation.x} ${currLocation.y} ${destination}`;
-                console.log ( result );
+                return `${currLocation.x} ${currLocation.y} ${destination}`;
                 break;
-                }
+            }
             default: {
-                    console.log ( "Unknown command received" );
-                    break;
+                return  "Processor: Unknown command received" ;
+                break;
                 }
             }
 
+        this.repository.SetLocation ( new RobotLocation ( newX , newY , newDirection ) );
 
-
-        return result;
+        return;
     }
 
 
