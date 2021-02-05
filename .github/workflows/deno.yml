@@ -15,21 +15,18 @@ on:
     branches: [main]
 
 jobs:
-  test:
-    runs-on: ${{ matrix.os }} # runs a test on Ubuntu, Windows and macOS
-
+  build:
+    runs-on: ubuntu-16.04
     strategy:
       matrix:
-        deno: ["v1.x"]
-        os: [ubuntu-latest]
-
-steps:
-  - uses: actions/checkout@v2
-  - uses: denolib/setup-deno@v2
-    with:
-      deno-version: v1.x
-  - run: |
-      deno --version
-      deno run https://deno.land/std/examples/welcome.ts
-      deno install --allow-read -n deno_cat https://deno.land/std/examples/cat.ts
-      deno_cat ./README.md
+        deno: ["v1.0.0"]
+    name: Deno ${{ matrix.deno }} sample
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Deno
+        uses: denolib/setup-deno@v2
+        with:
+          deno-version: ${{ matrix.deno }}
+      - run: |
+          deno --version
+          deno run https://deno.land/std/examples/welcome.ts
