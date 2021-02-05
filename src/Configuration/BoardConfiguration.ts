@@ -1,3 +1,5 @@
+import { load } from 'ts-dotenv';
+
 export class BoardConfiguration{
     get width(): number {
         return this._width;
@@ -6,9 +8,14 @@ export class BoardConfiguration{
         return this._length;
     }
 
-    constructor(length: number , width: number) {
-        this._length = length;
-        this._width = width;
+    constructor() {
+        const env = load( {
+            LENGTH: Number ,
+            WIDTH: Number
+        });
+
+        this._length = env.LENGTH;
+        this._width = env.WIDTH;
     }
 
     private readonly _length: number;
