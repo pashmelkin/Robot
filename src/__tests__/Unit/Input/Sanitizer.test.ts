@@ -1,13 +1,12 @@
 import Sanitizer from '../../../Input/Sanitizer';
-import {Commands} from "../../../models/Commands";
+import { Commands } from '../../../models/Commands';
 
 const commands = [
     ['Move', Commands.MOVE],
     ['left', Commands.LEFT],
     ['rIgHt', Commands.RIGHT],
-    ['REPORT', Commands.REPORT]
+    ['REPORT', Commands.REPORT],
 ];
-
 
 let sanitizer: Sanitizer;
 
@@ -16,13 +15,10 @@ beforeEach(() => {
 });
 
 describe('Sanitizer', function () {
-    test.each(commands)(
-        'returns sanitized command',
-        (command: string, expectedResult: Commands) => {
-            const result = sanitizer.Sanitize(command);
-            expect(result.command).toEqual(expectedResult);
-        },
-    );
+    test.each(commands)('returns sanitized command', (command: string, expectedResult: Commands) => {
+        const result = sanitizer.Sanitize(command);
+        expect(result.command).toEqual(expectedResult);
+    });
     it('Sanitize function returns correct Place command', function () {
         const result = sanitizer.Sanitize('Place 1 2 South');
         expect(result.command).toBe('PLACE 1 2 SOUTH');
