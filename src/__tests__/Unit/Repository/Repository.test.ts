@@ -1,6 +1,7 @@
 import { Repository } from '../../../Repository/Repository';
 import { RobotLocation } from '../../../models/RobotLocation';
 import { BoardSides } from '../../../models/BoardSides';
+import { MoveCalculator } from '../../../Processor/MoveCalculator';
 
 describe('Repository', function () {
     it('Repository function returns undefined if initialized with undefined', function () {
@@ -11,9 +12,20 @@ describe('Repository', function () {
 });
 
 describe('Repository', function () {
-    it('Repository function returns something', function () {
-        const repo = new Repository(new RobotLocation(0, 0, BoardSides.NORTH));
+    let repo: Repository;
+    const loc = new RobotLocation(0, 0, BoardSides.NORTH);
+
+    beforeEach(() => {
+        repo = new Repository(loc);
+    });
+    it('Repository function returns correct location', function () {
         const result = repo.GetLocation();
-        //expect(result).toBe({"direction": "NORTH", "x": 0, "y": 0});
+        expect(result).toBe(loc);
+    });
+    it('Repository function returns correct location after set Location called', function () {
+        const loc2 = new RobotLocation(0, 3, BoardSides.WEST);
+        repo.SetLocation(loc2);
+        const result = repo.GetLocation();
+        expect(result).toBe(loc2);
     });
 });

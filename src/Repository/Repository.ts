@@ -6,7 +6,7 @@ export class Repository implements IRepository {
     constructor(location: RobotLocation) {
         this.location = location;
     }
-    GetLocation() {
+    GetLocation(): RobotLocation {
         return this.location;
     }
 
