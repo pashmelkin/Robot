@@ -8,7 +8,7 @@ export default class Sanitizer implements ISanitizer {
         const command = input.toLocaleUpperCase();
 
         const regexPlace = new RegExp(
-            '\\d+ \\d+ ' + `${BoardSides.NORTH}|${BoardSides.EAST}|${BoardSides.WEST}|${BoardSides.SOUTH}`,
+            '\\d \\d ' + `${BoardSides.NORTH}|${BoardSides.EAST}|${BoardSides.WEST}|${BoardSides.SOUTH}`,
         );
         const regexSimpleCommands = new RegExp(
             `${Commands.LEFT}|${Commands.REPORT}|${Commands.RIGHT}|${Commands.MOVE}` + '$',
@@ -17,6 +17,7 @@ export default class Sanitizer implements ISanitizer {
         if (command.startsWith(Commands.PLACE)) {
             if (!regexPlace.test(command)) {
                 error = 'Sanitize: Wrong Place command format';
+                console.log(command);
             }
         } else if (!regexSimpleCommands.test(command)) {
             error = `Sanitize: Unknown command: ${input}`;
