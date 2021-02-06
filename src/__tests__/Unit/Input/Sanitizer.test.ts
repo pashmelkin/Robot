@@ -8,6 +8,12 @@ const commands = [
     ['REPORT', Commands.REPORT],
 ];
 
+const commandsInput = [
+    ['Place 1.2 3 north', 'Sanitize: special symbols detected'],
+    ['Move it', 'Sanitize: Unknown command: Move it'],
+    ['Place 1 2', 'Sanitize: Wrong Place command format'],
+];
+
 let sanitizer: Sanitizer;
 
 beforeEach(() => {
@@ -27,17 +33,8 @@ describe('Sanitizer', function () {
 });
 
 describe('Sanitizer', function () {
-    it('Sanitize function returns error in case the command is wrong', function () {
-        const result = sanitizer.Sanitize('Move it');
-        expect(result.error).toBe('Sanitize: Unknown command: Move it');
-    });
-    it('Sanitize function returns empty string if wrong Place command', function () {
-        const result = sanitizer.Sanitize('Place 1 2');
-        expect(result.error).toBe('Sanitize: Wrong Place command format');
-    });
-    it('Sanitize function returns correct side if wrong Place command', function () {
-        const result = sanitizer.Sanitize('Place 1.4 2 NORTH');
-        expect(result.command).toBe('PLACE 1.4 2 NORTH');
-        expect(result.error).toBe(undefined);
+    test.each(commandsInput)('returns expected error depends on input', (input: string, expectedResult: string) => {
+        const result = sanitizer.Sanitize(input);
+        expect(result.error).toBe(expectedResult);
     });
 });

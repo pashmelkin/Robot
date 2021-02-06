@@ -7,6 +7,8 @@ export default class Sanitizer implements ISanitizer {
         let error: string = undefined;
         const command = input.toLocaleUpperCase();
 
+        const specialChars = new RegExp('.!@#\\$%\\^\\&*');
+
         const regexPlace = new RegExp(
             '\\d \\d ' + `${BoardSides.NORTH}|${BoardSides.EAST}|${BoardSides.WEST}|${BoardSides.SOUTH}`,
         );
@@ -14,10 +16,11 @@ export default class Sanitizer implements ISanitizer {
             `${Commands.LEFT}|${Commands.REPORT}|${Commands.RIGHT}|${Commands.MOVE}` + '$',
         );
 
-        if (command.startsWith(Commands.PLACE)) {
+        if (specialChars.test(command)) {
+            error = 'Sanitize: special symbols detected';
+        } else if (command.startsWith(Commands.PLACE)) {
             if (!regexPlace.test(command)) {
                 error = 'Sanitize: Wrong Place command format';
-                console.log(command);
             }
         } else if (!regexSimpleCommands.test(command)) {
             error = `Sanitize: Unknown command: ${input}`;
