@@ -6,7 +6,7 @@
   "scripts": {
     "prebuild": "rm -rf dist/*",
     "build": "tsc && cp -rf package.json dist/package.json",
-    "prestart": "npm run build",
+    "prestart": "npm run lint && npm run build",
     "start": "node dist/main",
     "test": "jest",
     "lint": "eslint '*/**/*.{ts,tsx}' --quiet --fix"
