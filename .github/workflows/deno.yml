@@ -30,3 +30,8 @@ jobs:
       - run: |
           deno --version
           deno run https://deno.land/std/examples/welcome.ts
+      - name: Install dependencies
+        run: npm install
+      - name: Run unit tests
+        id: unittests
+        run: npm run test

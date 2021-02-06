@@ -18,7 +18,7 @@ class RobotApp {
     }
 
     private help() {
-        console.log("=======================================================");
+        console.log('=======================================================');
         console.log('Welcome to Toy Robot CLI.');
         console.log("The first command is expected is 'PLACE/'");
         console.log('PLACE X,Y,F  X,Y - numbers, F is one of directions: North, West, East, South');
@@ -28,8 +28,7 @@ class RobotApp {
         console.log('MOVE');
         console.log('REPORT');
         console.log('All commands are case insensitive');
-        console.log("=======================================================");
-
+        console.log('=======================================================');
     }
     start() {
         let result: string = undefined;
