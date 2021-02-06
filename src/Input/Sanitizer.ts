@@ -3,8 +3,10 @@ import { BoardSides } from '../models/BoardSides';
 import { Commands } from '../models/Commands';
 
 export default class Sanitizer implements ISanitizer {
-    Sanitize(input: string): string {
+    Sanitize(input: string): { command: string; error: string } {
+        let error: string = undefined;
         const command = input.toLocaleUpperCase();
+
         const regexPlace = new RegExp(
             '\\d+ \\d+ ' + `${BoardSides.NORTH}|${BoardSides.EAST}|${BoardSides.WEST}|${BoardSides.SOUTH}`,
         );
@@ -14,14 +16,12 @@ export default class Sanitizer implements ISanitizer {
 
         if (command.startsWith(Commands.PLACE)) {
             if (!regexPlace.test(command)) {
-                console.log('Sanitize: Wrong Place command format');
-                return undefined;
+                error = 'Sanitize: Wrong Place command format';
             }
         } else if (!regexSimpleCommands.test(command)) {
-            console.log('Sanitize: Unknown command:' + command);
-            return undefined;
+            error = `Sanitize: Unknown command: ${input}`;
         }
 
-        return command;
+        return { command, error };
     }
 }

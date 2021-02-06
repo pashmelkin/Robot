@@ -20,7 +20,7 @@ jobs:
     strategy:
       matrix:
         deno: ["v1.0.0"]
-    name: Deno ${{ matrix.deno }} sample
+    name: CI with ${{ matrix.deno }}
     steps:
       - uses: actions/checkout@v2
       - name: Setup Deno

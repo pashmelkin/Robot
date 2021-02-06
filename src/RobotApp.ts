@@ -38,8 +38,9 @@ class RobotApp {
 
             if (command !== undefined) {
                 result = this.moveProcessor.MoveRobot(command);
+
+                if (result !== undefined) console.log(`${result}`);
             }
-            if (result !== undefined) console.log(`${result}`);
         }
         console.log('bye for now...');
     }
