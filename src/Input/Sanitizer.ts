@@ -7,7 +7,6 @@ export default class Sanitizer implements ISanitizer {
         let error: string = undefined;
         const command = input.toLocaleUpperCase();
 
-        const specialChars = new RegExp('#');
         const specials = /[^A-Za-z 0-9]/g;
 
         const regexPlace = new RegExp(

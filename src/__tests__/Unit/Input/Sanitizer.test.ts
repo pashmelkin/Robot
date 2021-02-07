@@ -12,6 +12,10 @@ const commandsInput = [
     ['Place 2 3 north#', 'Sanitize: special symbols detected'],
     ['Place 2 3 north$', 'Sanitize: special symbols detected'],
     ['Place 2 ~ north', 'Sanitize: special symbols detected'],
+    ['Place 2 2 north@', 'Sanitize: special symbols detected'],
+    ['Place 2.3 2 north', 'Sanitize: special symbols detected'],
+    ['Place 0.1 2 South', 'Sanitize: special symbols detected'],
+    ['Place 0 2 Soyth', 'Sanitize: Wrong Place command format'],
     ['Move it', 'Sanitize: Unknown command: Move it'],
     ['Place 1 2', 'Sanitize: Wrong Place command format'],
 ];
@@ -35,8 +39,11 @@ describe('Sanitizer', function () {
 });
 
 describe('Sanitizer', function () {
-    test.each(commandsInput)('returns expected error depends on input', (input: string, expectedResult: string) => {
-        const result = sanitizer.Sanitize(input);
-        expect(result.error).toBe(expectedResult);
-    });
+    test.each(commandsInput)(
+        'returns expected error message depends on input',
+        (input: string, expectedResult: string) => {
+            const result = sanitizer.Sanitize(input);
+            expect(result.error).toBe(expectedResult);
+        },
+    );
 });
