@@ -9,7 +9,9 @@ const commands = [
 ];
 
 const commandsInput = [
-    ['Place 1.2 3 north', 'Sanitize: special symbols detected'],
+    ['Place 2 3 north#', 'Sanitize: special symbols detected'],
+    ['Place 2 3 north$', 'Sanitize: special symbols detected'],
+    ['Place 2 ~ north', 'Sanitize: special symbols detected'],
     ['Move it', 'Sanitize: Unknown command: Move it'],
     ['Place 1 2', 'Sanitize: Wrong Place command format'],
 ];
