@@ -53,10 +53,11 @@ npm start
 ### CI/CD pipeline
 
 I'm using github action which run unit tests.
+Also there's pre-commit husky hook to run tslint.
 
 ## Known bugs
 None :)
 
 ## TODO
 1. Add unit tests for  stdin (the library readline-sync)
-2. Add github pre-commit hook with tslint
+2. Install github pre-commit hook with husky
