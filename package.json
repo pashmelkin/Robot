@@ -9,7 +9,7 @@
     "prestart": "npm run lint && npm run build",
     "start": "node dist/main",
     "test": "jest --coverage",
-    "lint": "eslint '*/**/*.{ts,tsx}' --quiet --fix",
+    "lint": "eslint '*/**/*.{ts,tsx}' --quiet --fix"
   },
   "author": "Pavel Shm",
   "keywords": [],
