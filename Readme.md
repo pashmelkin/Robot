@@ -42,6 +42,7 @@ Unit tests are written/executed with Jest:
 npm test
 ```
 There're quite a lot of tests since I tried to thoroughly test the MoveCalculator and Sanitizer modules.
+Also code coverage is displayed.
 
 #### Start the robot
 To start the robot you need the run the command:
@@ -57,6 +58,5 @@ I'm using github action which run unit tests.
 None :)
 
 ## TODO
-1. Add unit test coverage tool (istanbul?)
-2. Add unit tests for  stdin (the library readline-sync)
-3. Add github pre-commit hook with tslint
+1. Add unit tests for  stdin (the library readline-sync)
+2. Add github pre-commit hook with tslint
