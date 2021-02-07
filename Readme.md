@@ -54,9 +54,9 @@ npm start
 I'm using github action which run unit tests.
 
 ## Known bugs
-Sanitizer lets slip the entries like 'Place 1 2 North%$'
+None :)
 
 ## TODO
 1. Add unit test coverage tool (istanbul?)
-2. Add unit tests for  strdin (the library readline-sync)
+2. Add unit tests for  stdin (the library readline-sync)
 3. Add github pre-commit hook with tslint
