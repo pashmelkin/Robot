@@ -7,10 +7,10 @@ export default class Sanitizer implements ISanitizer {
         let error: string = undefined;
         const command = input.toLocaleUpperCase();
 
-        const specials = /[^A-Za-z 0-9]/g;
+        const specials = /[^A-Za-z 0-9,]/g;
 
         const regexPlace = new RegExp(
-            '\\d \\d ' + `${BoardSides.NORTH}|${BoardSides.EAST}|${BoardSides.WEST}|${BoardSides.SOUTH}`,
+            '\\d,\\d,' + `${BoardSides.NORTH}|${BoardSides.EAST}|${BoardSides.WEST}|${BoardSides.SOUTH}`,
         );
         const regexSimpleCommands = new RegExp(
             `${Commands.LEFT}|${Commands.REPORT}|${Commands.RIGHT}|${Commands.MOVE}` + '$',

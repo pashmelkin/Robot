@@ -9,15 +9,15 @@ const commands = [
 ];
 
 const commandsInput = [
-    ['Place 2 3 north#', 'Sanitize: special symbols detected'],
-    ['Place 2 3 north$', 'Sanitize: special symbols detected'],
-    ['Place 2 ~ north', 'Sanitize: special symbols detected'],
-    ['Place 2 2 north@', 'Sanitize: special symbols detected'],
-    ['Place 2.3 2 north', 'Sanitize: special symbols detected'],
-    ['Place 0.1 2 South', 'Sanitize: special symbols detected'],
-    ['Place 0 2 Soyth', 'Sanitize: Wrong Place command format'],
+    ['Place 2,3,north#', 'Sanitize: special symbols detected'],
+    ['Place 2,3,north$', 'Sanitize: special symbols detected'],
+    ['Place 2,~,north', 'Sanitize: special symbols detected'],
+    ['Place 2,2,north@', 'Sanitize: special symbols detected'],
+    ['Place 2.3,2,north', 'Sanitize: special symbols detected'],
+    ['Place 0.1,2,South', 'Sanitize: special symbols detected'],
+    ['Place 0,2,Soyth', 'Sanitize: Wrong Place command format'],
     ['Move it', 'Sanitize: Unknown command: Move it'],
-    ['Place 1 2', 'Sanitize: Wrong Place command format'],
+    ['Place 1,2', 'Sanitize: Wrong Place command format'],
 ];
 
 let sanitizer: Sanitizer;
@@ -32,8 +32,8 @@ describe('Sanitizer', function () {
         expect(result.command).toEqual(expectedResult);
     });
     it('Sanitize function returns correct Place command', function () {
-        const result = sanitizer.Sanitize('Place 1 2 South');
-        expect(result.command).toBe('PLACE 1 2 SOUTH');
+        const result = sanitizer.Sanitize('Place 1,2,South');
+        expect(result.command).toBe('PLACE 1,2,SOUTH');
         expect(result.error).toBe(undefined);
     });
 });
