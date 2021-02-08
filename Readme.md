@@ -41,7 +41,7 @@ Unit tests are written/executed with Jest:
 ```bash
 npm test
 ```
-There're quite a lot of tests since I tried to thoroughly test the MoveCalculator and Sanitizer modules.
+There're quite a lot of tests since I tried to thoroughly test the MoveCalculator and Sanitizer2 modules.
 Also code coverage is displayed.
 
 #### Start the robot

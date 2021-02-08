@@ -1,5 +1,5 @@
 import InputReader from './Input/InputReader';
-import Sanitizer from './Input/Sanitizer';
+import Sanitizer2 from './Input/SanitizerImpl';
 import { Processor } from './Processor/Processor';
 import { Repository } from './Repository/Repository';
 import { BoardConfiguration } from './Configuration/BoardConfiguration';
@@ -11,7 +11,7 @@ class RobotApp {
     private readonly boardConfiguration: BoardConfiguration;
 
     constructor() {
-        this.inputReader = new InputReader(this.prompt, new Sanitizer());
+        this.inputReader = new InputReader(this.prompt, new Sanitizer2());
         const repository = new Repository(undefined);
         this.moveProcessor = new Processor(repository);
         this.boardConfiguration = new BoardConfiguration();
