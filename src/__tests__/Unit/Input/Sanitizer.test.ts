@@ -41,8 +41,8 @@ describe('Sanitizer', function () {
     test.each(commandsInput)(
         'returns expected error message depends on input',
         (input: string, expectedResult: string) => {
-          //  const result = sanitizer.sanitize(input);
-           // expect(result).toBe(expectedResult);
+            //  const result = sanitizer.sanitize(input);
+            // expect(result).toBe(expectedResult);
             expect(true).toBe(true);
         },
     );

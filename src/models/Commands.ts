@@ -6,7 +6,7 @@ export enum SimpleCommands {
 }
 
 export enum ComplexCommands {
-    PLACE = 'PLACE'
+    PLACE = 'PLACE',
 }
 
 export const Commands = { ...SimpleCommands, ...ComplexCommands };

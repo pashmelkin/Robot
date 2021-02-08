@@ -6,9 +6,8 @@ export function readCli(prompt: string, sanitizer: ISanitizer): string {
     let res: string;
 
     try {
-        res = sanitizer.sanitize ( answer );
-    }
-    catch (e) {
+        res = sanitizer.sanitize(answer);
+    } catch (e) {
         console.error(e);
     }
     return res;
