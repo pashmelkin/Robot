@@ -2,18 +2,17 @@ import { SimpleCommands } from '../models/Commands';
 import { Sanitizer } from './Sanitizer';
 
 export default class SanitizerImpl extends Sanitizer {
-    isCommandComplex = (input: string): boolean => !(this.normalizeCommand(input) in SimpleCommands);
+    isCommandComplex = (): boolean => !(this.command in SimpleCommands);
 
-    sanitizeSimpleCmd = function (input: string): string {
-        const command = this.normalizeCommand(input);
+    sanitizeSimpleCmd = function (): string {
 
-        if (input.toLocaleUpperCase() in SimpleCommands) {
-            return command;
+        if (this.command in SimpleCommands) {
+            return this.command;
         }
-        throw new Error(`Command is unknown: ${command}`);
+        throw new Error(`Command is unknown: ${this.command}`);
     };
 
-    sanitizeComplexCmd(input: string): string {
-        return this.normalizeCommand(input);
+    sanitizeComplexCmd(): string {
+        return this.command;
     }
 }
