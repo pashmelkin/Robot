@@ -2,7 +2,7 @@ import InputSanitizer from '../../../Input/InputSanitizer';
 import { Commands } from '../../../models/Commands';
 
 const commands = [
-    ['Move', Commands.MOVE],
+    ['move', Commands.MOVE],
     ['left', Commands.LEFT],
     ['rIgHt', Commands.RIGHT],
     ['REPORT', Commands.REPORT],
@@ -19,7 +19,7 @@ const commandsInput = [
     ['Place #,$,north', 'Sanitize: Wrong Complex command format:'],
     ['Place 0.1,2,South', 'Sanitize: Wrong Complex command format:'],
     ['Place 0,2,Soyth', 'Sanitize: Wrong Complex command format:'],
-    ['Move it', 'Sanitize: Wrong Complex command format:'],
+    ['move it', 'Sanitize: Wrong Complex command format:'],
     ['Place 1,2', 'Sanitize: Wrong Complex command format:'],
 ];
 

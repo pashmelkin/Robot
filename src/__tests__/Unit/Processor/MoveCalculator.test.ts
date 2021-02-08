@@ -44,22 +44,27 @@ beforeEach(() => {
     moveCalculator = new MoveCalculator();
 });
 
-describe('MoveCalculator:IsPlacementLegimit function ', function () {
+describe('MoveCalculator:isPlacementLegimit function ', function () {
     test.each(placeLocations)(
         'returns expected result depends on location',
         (location: RobotLocation, expectedResult: boolean) => {
-            const result = moveCalculator.IsPlacementLegimit(location);
+            const result = moveCalculator.isPlacementLegimit(location);
             expect(result).toEqual(expectedResult);
         },
     );
 });
 
-describe('MoveCalculator:Move function ', function () {
+describe('MoveCalculator:move function ', function () {
     test.each(moves)(
         'returns expected result depends on location',
         (location: RobotLocation, expectedLocation: RobotLocation) => {
-            const resultLocation = moveCalculator.Move(location).location;
-            expect(resultLocation).toEqual(expectedLocation);
+            let resultLocation: RobotLocation;
+            try {
+                resultLocation = moveCalculator.move(location);
+                expect(resultLocation).toEqual(expectedLocation);
+            } catch (e) {
+                expect(e.message).toEqual('Robot will fall off the board.');
+            }
         },
     );
 });

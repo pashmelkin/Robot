@@ -1,5 +1,5 @@
 import IReader from './IReader';
-import { readCli } from './CommandLine';
+import { commandLine } from './CommandLine';
 import ISanitizer from './ISanitizer';
 
 export default class InputReader implements IReader {
@@ -11,6 +11,6 @@ export default class InputReader implements IReader {
     }
 
     read(): string {
-        return readCli(this.prompt, this.sanitizer);
+        return commandLine(this.prompt, this.sanitizer);
     }
 }

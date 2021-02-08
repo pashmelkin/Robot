@@ -17,7 +17,7 @@ export class Processor implements IProcessor {
         this.moveCalculator = new MoveCalculator();
     }
 
-    public MoveRobot(command: string): string {
+    public moveRobot(command: string): string {
         const currLocation = this.repository?.GetLocation();
         const currDirection = currLocation?.direction;
         const currX = currLocation?.x;
@@ -41,7 +41,7 @@ export class Processor implements IProcessor {
                 if (isNaN(y)) return `Wrong Place command parameter: ${params[2]}`;
                 const direction = BoardSides[params[3]];
 
-                if (this.moveCalculator.IsPlacementLegimit(new RobotLocation(x, y, direction))) {
+                if (this.moveCalculator.isPlacementLegimit(new RobotLocation(x, y, direction))) {
                     newX = x;
                     newY = y;
                     newDirection = direction;
@@ -59,10 +59,13 @@ export class Processor implements IProcessor {
             }
             case Commands.MOVE:
                 {
-                    const moveRes = this.moveCalculator.Move(currLocation);
-                    if (moveRes.error === undefined) {
-                        newY = moveRes.location.y;
-                        newX = moveRes.location.x;
+                    try {
+                        const moveRes = this.moveCalculator.move(currLocation);
+
+                        newY = moveRes.y;
+                        newX = moveRes.x;
+                    } catch (e) {
+                        console.error(e.message);
                     }
                 }
                 break;

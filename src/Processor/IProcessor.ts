@@ -1,3 +1,3 @@
 export interface IProcessor {
-    MoveRobot: (command: string) => string;
+    moveRobot: (command: string) => string;
 }

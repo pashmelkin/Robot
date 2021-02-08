@@ -9,8 +9,7 @@ export class MoveCalculator {
         this.boardSize = new BoardConfiguration();
     }
 
-    Move(location: RobotLocation): { location: RobotLocation; error: string } {
-        let error: string = undefined;
+    move(location: RobotLocation): RobotLocation {
         const newLocation: RobotLocation = location;
         if (location.direction === BoardSides.EAST && location.x < this.boardSize.width - 1) {
             newLocation.x++;
@@ -20,11 +19,11 @@ export class MoveCalculator {
             newLocation.y++;
         } else if (location.direction === BoardSides.SOUTH && location.y > 1) {
             newLocation.y--;
-        } else error = 'Robot will fall off the board.';
-        return { location: newLocation, error };
+        } else throw new Error('Robot will fall off the board.');
+        return location;
     }
 
-    IsPlacementLegimit(location: RobotLocation): boolean {
+    isPlacementLegimit(location: RobotLocation): boolean {
         let result = true;
         if (
             location.x >= this.boardSize.width ||
