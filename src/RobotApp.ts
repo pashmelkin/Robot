@@ -1,17 +1,17 @@
 import InputReader from './Input/InputReader';
-import Sanitizer2 from './Input/SanitizerImpl';
+import Sanitizer from './Input/InputSanitizer';
 import { Processor } from './Processor/Processor';
 import { Repository } from './Repository/Repository';
 import { BoardConfiguration } from './Configuration/BoardConfiguration';
 
 class RobotApp {
-    private readonly prompt: string = 'What is the robot command, please: => ';
+    private readonly prompt: string = 'What is the robot commandName, please: => ';
     private readonly inputReader: InputReader;
     private readonly moveProcessor: Processor;
     private readonly boardConfiguration: BoardConfiguration;
 
     constructor() {
-        this.inputReader = new InputReader(this.prompt, new Sanitizer2());
+        this.inputReader = new InputReader(this.prompt, new Sanitizer());
         const repository = new Repository(undefined);
         this.moveProcessor = new Processor(repository);
         this.boardConfiguration = new BoardConfiguration();
@@ -20,7 +20,7 @@ class RobotApp {
     private help() {
         console.log('=======================================================');
         console.log('Welcome to Toy Robot CLI.');
-        console.log("The first command is expected is 'PLACE/'");
+        console.log("The first commandName is expected is 'PLACE/'");
         console.log('PLACE X,Y,F  X,Y - numbers, F is one of directions: North, West, East, South');
         console.log('Others correct commands are:');
         console.log('LEFT');

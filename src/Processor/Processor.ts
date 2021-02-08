@@ -30,7 +30,7 @@ export class Processor implements IProcessor {
         const params = command.split(' ');
         const commandName = params[0];
         if (commandName !== Commands.PLACE && currLocation === undefined) {
-            return 'Not ready to move. Please put the Place command first.';
+            return 'Not ready to move. Please put the Place commandName first.';
         }
 
         switch (commandName) {
@@ -45,7 +45,7 @@ export class Processor implements IProcessor {
                     newX = x;
                     newY = y;
                     newDirection = direction;
-                } else return 'Wrong Place command parameters.';
+                } else return 'Wrong Place commandName parameters.';
                 x;
                 break;
             }
@@ -72,7 +72,7 @@ export class Processor implements IProcessor {
                 break;
             }
             default: {
-                return 'Processor: Unknown command received';
+                return 'Processor: Unknown commandName received';
                 break;
             }
         }
