@@ -1,15 +1,14 @@
 import ISanitizer from './ISanitizer';
 
 export abstract class Sanitizer implements ISanitizer {
-    protected command: string;
+    protected commandName: string;
     sanitize = function (input: string): string {
-        this.command = this.normalizeCommand(input);
-        return this.isCommandComplex(this.command) ? this.sanitizeComplexCmd() :
-            this.sanitizeSimpleCmd();
+        this.commandName = this.normalizeCommand(input);
+        return this.isCommandComplex(this.commandName) ? this.sanitizeComplexCmd(input) : this.sanitizeSimpleCmd();
     };
 
-    protected normalizeCommand = (input: string) => input.toLocaleUpperCase();
+    protected normalizeCommand = (input: string) => input.toLocaleUpperCase()?.split(' ')[0];
     abstract sanitizeSimpleCmd(): string;
-    abstract sanitizeComplexCmd(): string;
+    abstract sanitizeComplexCmd(input: string): string;
     abstract isCommandComplex: () => boolean;
 }
