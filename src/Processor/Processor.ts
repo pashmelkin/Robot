@@ -51,10 +51,10 @@ export class Processor implements IProcessor {
             }
             case Commands.LEFT:
             case Commands.RIGHT: {
-                const sideRes = this.sideHelper.GetNextSide(commandName, currDirection);
+                /* const sideRes = this.sideHelper.GetNextSide(Commands.LEFT, currDirection);
                 if (sideRes.error === undefined) {
                     newDirection = sideRes.side;
-                }
+                }*/
                 break;
             }
             case Commands.MOVE:
