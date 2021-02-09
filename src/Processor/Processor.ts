@@ -1,36 +1,41 @@
-import { IProcessor } from './IProcessor';
 import { IRepository } from '../Repository/IRepository';
 import { Commands } from '../models/Commands';
 import { RobotLocation } from '../models/RobotLocation';
 import { BoardSides } from '../models/BoardSides';
 import { SideHelper } from '../Configuration/SideHelper';
 import { MoveCalculator } from './MoveCalculator';
+import { PlacementProcessor } from './PlacementProcessor';
+import { ProcessorAbs } from './ProcessorAbs';
 
-export class Processor implements IProcessor {
+export class Processor extends ProcessorAbs {
     repository: IRepository;
     sideHelper: SideHelper;
     moveCalculator: MoveCalculator;
+    placementProc: PlacementProcessor;
 
     constructor(repository: IRepository) {
+        super();
         this.repository = repository;
         this.sideHelper = new SideHelper();
         this.moveCalculator = new MoveCalculator();
+        this.placementProc = new PlacementProcessor();
     }
+    getLocation = (): RobotLocation => this.repository?.GetLocation();
 
-    public moveRobot(command: string): string {
-        const currLocation = this.repository?.GetLocation();
+    public moveRobot(command: string) {
+        const currLocation = this.getLocation();
         const currDirection = currLocation?.direction;
-        const currX = currLocation?.x;
+        const currX = currLocation?.x; /// add coordinates type
         const currY = currLocation?.y;
 
         let newDirection = currDirection;
         let newX = currX;
         let newY = currY;
 
-        const params = command.split(',');
+        const params = command.split(/[ ,]+/);
         const commandName = params[0];
-        if (commandName !== Commands.PLACE && currLocation === undefined) {
-            return 'Not ready to move. Please put the Place commandName first.';
+        if (currLocation === undefined && commandName !== Commands.PLACE) {
+            throw new Error('Not ready to move. Please put the Place commandName first.');
         }
 
         switch (commandName) {

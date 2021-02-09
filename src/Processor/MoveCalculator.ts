@@ -22,17 +22,4 @@ export class MoveCalculator {
         } else throw new Error('Robot will fall off the board.');
         return location;
     }
-
-    isPlacementLegimit(location: RobotLocation): boolean {
-        let result = true;
-        if (
-            location.x >= this.boardSize.width ||
-            location.y >= this.boardSize.length ||
-            location.x < 0 ||
-            location.y < 0
-        ) {
-            result = false;
-        }
-        return result;
-    }
 }
