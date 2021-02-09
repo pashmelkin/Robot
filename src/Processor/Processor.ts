@@ -27,7 +27,7 @@ export class Processor implements IProcessor {
         let newX = currX;
         let newY = currY;
 
-        const params = command.split(' ');
+        const params = command.split(',');
         const commandName = params[0];
         if (commandName !== Commands.PLACE && currLocation === undefined) {
             return 'Not ready to move. Please put the Place commandName first.';

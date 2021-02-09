@@ -6,6 +6,8 @@ const commands = [
     ['left', Commands.LEFT],
     ['rIgHt', Commands.RIGHT],
     ['REPORT', Commands.REPORT],
+    ['Place 1,2,South', 'PLACE 1,2,SOUTH'],
+    ['place 1,2,north', 'PLACE 1,2,NORTH'],
 ];
 
 const commandsInput = [
@@ -33,10 +35,6 @@ describe('Sanitizer', function () {
     test.each(commands)('returns sanitized commandName', (command: string, expectedResult: any) => {
         const result = sanitizer.sanitize(command);
         expect(result).toEqual(expectedResult);
-    });
-    it('Sanitize function returns correct Place commandName', function () {
-        const result = sanitizer.sanitize('Place 1,2,South');
-        expect(result).toBe('PLACE 1,2,SOUTH');
     });
 });
 
