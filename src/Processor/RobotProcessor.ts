@@ -7,6 +7,7 @@ import { MoveCalculator } from './MoveCalculator';
 import { PlacementProcessor } from './PlacementProcessor';
 import { Processor } from './Processor';
 import { BoardConfiguration } from '../Configuration/BoardConfiguration';
+import { NotReadyToMoveError } from '../models/NotReadyToMoveError';
 
 export class RobotProcessor extends Processor {
     private readonly repository: IRepository;
@@ -40,9 +41,8 @@ export class RobotProcessor extends Processor {
             newPlaceLoc = new RobotLocation(parseInt(params[1]), parseInt(params[2]), BoardSides[params[3]]);
         else newPlaceLoc = currLocation;
 
-        //Move it?
         if (currLocation === undefined && commandName !== Commands.PLACE) {
-            throw new Error(`Not ready to process the command. Please put the ${Commands.PLACE} command first.`);
+            throw new NotReadyToMoveError();
         }
 
         const moveFunc = this.commandsMap[commandName];
