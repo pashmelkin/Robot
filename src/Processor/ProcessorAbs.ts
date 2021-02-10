@@ -7,9 +7,7 @@ export abstract class ProcessorAbs implements IProcessor {
     abstract getLocation: () => RobotLocation;
     abstract moveRobot(command: string): string | undefined;
 
-    process(command: string): string {
-        return command === Commands.REPORT ? this.report() : this.moveRobot(command);
-    }
+    process = (command: string) => (command === Commands.REPORT ? this.report() : this.moveRobot(command));
 
     report(): string {
         const location = this.getLocation();

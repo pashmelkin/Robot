@@ -37,9 +37,12 @@ class RobotApp {
             const command = this.inputReader.read();
 
             if (command !== undefined) {
-                result = this.moveProcessor.moveRobot(command);
-
-                if (result !== undefined) console.log(`${result}`);
+                try {
+                    result = this.moveProcessor.process(command);
+                    if (result !== undefined) console.log(`${result}`);
+                } catch (e) {
+                    console.error(e);
+                }
             }
         }
         console.log('bye for now...');

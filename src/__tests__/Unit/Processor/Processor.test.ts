@@ -43,3 +43,35 @@ describe('Processor', function () {
         expect(result).toBe(correctLocationStr);
     });
 });
+
+describe('Processor commands: MOVE', function () {
+    it('process with Move command returns correct new location', function () {
+        const repo = new Repository(correctLocation);
+        const processor = new Processor(repo);
+        processor.process(Commands.MOVE);
+
+        const result = processor.process(Commands.REPORT);
+
+        expect(result).toBe('1,1,SOUTH');
+    });
+    it('process with Left command returns correct new location', function () {
+        const repo = new Repository(undefined);
+        const processor = new Processor(repo);
+        processor.process("PLACE 1,2,NORTH")
+        processor.process(Commands.LEFT);
+
+        const result = processor.process(Commands.REPORT);
+
+        expect(result).toBe('1,2,WEST');
+    });
+    it('process with Right command returns correct new location', function () {
+        const repo = new Repository(undefined);
+        const processor = new Processor(repo);
+        processor.process("PLACE 1,2,NORTH")
+        processor.process(Commands.RIGHT);
+
+        const result = processor.process(Commands.REPORT);
+
+        expect(result).toBe('1,2,EAST');
+    });
+});
