@@ -2,6 +2,7 @@ import InputReader from './Input/InputReader';
 import Sanitizer from './Input/InputSanitizer';
 import { Processor } from './Processor/Processor';
 import { Repository } from './Repository/Repository';
+import { help } from './Input/help';
 
 class RobotApp {
     private readonly prompt: string = 'What is the robot commandName, please: => ';
@@ -14,32 +15,18 @@ class RobotApp {
         this.moveProcessor = new Processor(repository);
     }
 
-    private help() {
-        console.log('=======================================================');
-        console.log('Welcome to Toy Robot CLI.');
-        console.log("The first commandName is expected is 'PLACE/'");
-        console.log('PLACE X,Y,F  X,Y - numbers, F is one of directions: North, West, East, South');
-        console.log('Others correct commands are:');
-        console.log('LEFT');
-        console.log('RIGHT');
-        console.log('MOVE');
-        console.log('REPORT');
-        console.log('All commands are case insensitive');
-        console.log('=======================================================');
-    }
     start() {
         let result: string = undefined;
-        this.help();
+        help();
         while (true) {
             const command = this.inputReader.read();
+            if (command === undefined) continue;
 
-            if (command !== undefined) {
-                try {
-                    result = this.moveProcessor.process(command);
-                    if (result !== undefined) console.log(`${result}`);
-                } catch (e) {
-                    console.error(e);
-                }
+            try {
+                result = this.moveProcessor.process(command);
+                if (result !== undefined) console.log(`${result}`);
+            } catch (e) {
+                console.error(e.message);
             }
         }
         console.log('bye for now...');
