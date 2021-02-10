@@ -1,6 +1,5 @@
 # Toy Robot
 
-Foobar is a Python library for dealing with word pluralization.
 
 ## Installation
 
@@ -56,8 +55,7 @@ I'm using github action which run unit tests.
 Also there's pre-commit husky hook to run tslint.
 
 ## Known bugs
-None :)
+the CLI accepts the error line `place 1,1,north#`
 
 ## TODO
 1. Add unit tests for  stdin (the library readline-sync)
-2. Install github pre-commit hook with husky
