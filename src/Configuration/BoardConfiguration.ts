@@ -16,7 +16,6 @@ export class BoardConfiguration {
 
         this._length = env.LENGTH;
         this._width = env.WIDTH;
-        console.log('init of board' + this._width);
     }
 
     private readonly _length: number;

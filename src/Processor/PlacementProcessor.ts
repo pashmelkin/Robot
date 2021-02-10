@@ -4,8 +4,8 @@ import { BoardConfiguration } from '../Configuration/BoardConfiguration';
 export class PlacementProcessor {
     private readonly boardSize: BoardConfiguration;
 
-    constructor() {
-        this.boardSize = new BoardConfiguration();
+    constructor(board: BoardConfiguration) {
+        this.boardSize = board;
     }
 
     isPlacementLegimit = (location: RobotLocation) =>

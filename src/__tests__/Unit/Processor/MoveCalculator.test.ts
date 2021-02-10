@@ -19,7 +19,7 @@ const moves = [
 let moveCalculator: MoveCalculator;
 
 beforeEach(() => {
-    moveCalculator = new MoveCalculator();
+    moveCalculator = new MoveCalculator(boardSize);
 });
 
 describe('MoveCalculator:move function ', function () {

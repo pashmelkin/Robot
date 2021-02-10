@@ -33,7 +33,7 @@ const placeLocations = [
 let placementProc: PlacementProcessor;
 
 beforeEach(() => {
-    placementProc = new PlacementProcessor();
+    placementProc = new PlacementProcessor(boardSize);
 });
 
 describe('PlacementProcessor:isPlacementLegimit function ', function () {
