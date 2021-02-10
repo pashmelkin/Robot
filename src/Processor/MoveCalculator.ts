@@ -3,7 +3,7 @@ import { RobotLocation } from '../models/RobotLocation';
 import { BoardSides } from '../models/BoardSides';
 
 export class MoveCalculator {
-    private readonly boardSize: BoardConfiguration;
+    private boardSize: BoardConfiguration;
 
     constructor() {
         this.boardSize = new BoardConfiguration();

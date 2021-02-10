@@ -8,7 +8,7 @@ export function commandLine(prompt: string, sanitizer: ISanitizer): string {
     try {
         res = sanitizer.sanitize(answer);
     } catch (e) {
-        console.error(e);
+        console.error(e.message);
     }
     return res;
 }

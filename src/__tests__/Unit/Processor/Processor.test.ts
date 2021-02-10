@@ -57,7 +57,7 @@ describe('Processor commands: MOVE', function () {
     it('process with Left command returns correct new location', function () {
         const repo = new Repository(undefined);
         const processor = new Processor(repo);
-        processor.process("PLACE 1,2,NORTH")
+        processor.process('PLACE 1,2,NORTH');
         processor.process(Commands.LEFT);
 
         const result = processor.process(Commands.REPORT);
@@ -67,7 +67,7 @@ describe('Processor commands: MOVE', function () {
     it('process with Right command returns correct new location', function () {
         const repo = new Repository(undefined);
         const processor = new Processor(repo);
-        processor.process("PLACE 1,2,NORTH")
+        processor.process('PLACE 1,2,NORTH');
         processor.process(Commands.RIGHT);
 
         const result = processor.process(Commands.REPORT);
