@@ -14,7 +14,6 @@ export default class InputSanitizer extends Sanitizer {
 
     sanitizeComplexCmd(input: string): string {
         const result = input.toLocaleUpperCase();
-        console.log(input);
         const regexPlace = new RegExp(
             '\\w+ \\d,\\d,' + `${BoardSides.NORTH}|${BoardSides.EAST}|${BoardSides.WEST}|${BoardSides.SOUTH}`,
         );

@@ -1,33 +1,19 @@
-import { BoardSides } from '../models/BoardSides';
-import { Commands } from '../models/Commands';
+import { SimpleCommands } from '../models/Commands';
+import { RobotLocation } from '../models/RobotLocation';
+import { Sider } from './Sider';
 
-export class SideHelper {
-    private readonly myMap: Map<string, BoardSides>;
-
-    constructor() {
-        this.myMap = new Map<string, BoardSides>([
-            [`${BoardSides.NORTH}${Commands.LEFT}`, BoardSides.WEST],
-            [`${BoardSides.NORTH}${Commands.RIGHT}`, BoardSides.EAST],
-            [`${BoardSides.SOUTH}${Commands.LEFT}`, BoardSides.EAST],
-            [`${BoardSides.SOUTH}${Commands.RIGHT}`, BoardSides.WEST],
-            [`${BoardSides.EAST}${Commands.LEFT}`, BoardSides.NORTH],
-            [`${BoardSides.EAST}${Commands.RIGHT}`, BoardSides.SOUTH],
-            [`${BoardSides.WEST}${Commands.LEFT}`, BoardSides.SOUTH],
-            [`${BoardSides.WEST}${Commands.RIGHT}`, BoardSides.NORTH],
-        ]);
-    }
-
-    public GetNextSide(command: Commands, currSide: BoardSides): { side: BoardSides; error: string } {
-        const projection = `${currSide}${command}`;
-        let side: BoardSides;
-        let error: string = undefined;
+export class SideHelper extends Sider {
+    GetNextSide(command: SimpleCommands, location: RobotLocation): RobotLocation {
+        const projection = `${location.direction}${command}`;
+        const newLocation = location;
 
         if (this.myMap.has(projection)) {
-            side = this.myMap.get(projection);
+            const newSide = this.myMap.get(projection);
+            newLocation.direction = newSide;
         } else {
-            error = `The combination ${currSide} ${command} not found`;
+            throw new Error(`The combination ${location.direction} ${command} not found`);
         }
 
-        return { side, error };
+        return newLocation;
     }
 }

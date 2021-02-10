@@ -5,6 +5,10 @@ export class RobotLocation {
         this.x = x;
         this.y = y;
         this.direction = direction;
+        /* if (isNaN(this.x))
+            throw new Error(`Wrong RobotLocation parameter: ${this.x}`);
+        if (isNaN(y))
+            throw new Error(`Wrong RobotLocation parameter: ${this.y}`)*/
     }
 
     x: number;

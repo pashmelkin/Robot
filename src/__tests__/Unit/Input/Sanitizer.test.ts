@@ -2,10 +2,12 @@ import InputSanitizer from '../../../Input/InputSanitizer';
 import { Commands } from '../../../models/Commands';
 
 const commands = [
-    ['Move', Commands.MOVE],
+    ['move', Commands.MOVE],
     ['left', Commands.LEFT],
     ['rIgHt', Commands.RIGHT],
     ['REPORT', Commands.REPORT],
+    ['Place 1,2,South', 'PLACE 1,2,SOUTH'],
+    ['place 1,2,north', 'PLACE 1,2,NORTH'],
 ];
 
 const commandsInput = [
@@ -19,7 +21,7 @@ const commandsInput = [
     ['Place #,$,north', 'Sanitize: Wrong Complex command format:'],
     ['Place 0.1,2,South', 'Sanitize: Wrong Complex command format:'],
     ['Place 0,2,Soyth', 'Sanitize: Wrong Complex command format:'],
-    ['Move it', 'Sanitize: Wrong Complex command format:'],
+    ['move it', 'Sanitize: Wrong Complex command format:'],
     ['Place 1,2', 'Sanitize: Wrong Complex command format:'],
 ];
 
@@ -33,10 +35,6 @@ describe('Sanitizer', function () {
     test.each(commands)('returns sanitized commandName', (command: string, expectedResult: any) => {
         const result = sanitizer.sanitize(command);
         expect(result).toEqual(expectedResult);
-    });
-    it('Sanitize function returns correct Place commandName', function () {
-        const result = sanitizer.sanitize('Place 1,2,South');
-        expect(result).toBe('PLACE 1,2,SOUTH');
     });
 });
 
