@@ -7,6 +7,8 @@ export class MoveCalculator {
 
     constructor(board: BoardConfiguration) {
         this.boardSize = board;
+        console.log('MoveCalculator ');
+        this.move = this.move.bind(this);
     }
 
     move(location: RobotLocation): RobotLocation {

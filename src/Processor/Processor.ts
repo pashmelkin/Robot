@@ -6,26 +6,23 @@ import { SideHelper } from '../Configuration/SideHelper';
 import { MoveCalculator } from './MoveCalculator';
 import { PlacementProcessor } from './PlacementProcessor';
 import { ProcessorAbs } from './ProcessorAbs';
-import { place } from './Place';
 import { BoardConfiguration } from '../Configuration/BoardConfiguration';
 
 export class Processor extends ProcessorAbs {
     private readonly repository: IRepository;
     private readonly sideHelper: SideHelper;
     private readonly moveCalculator: MoveCalculator;
-    private readonly placementProc: PlacementProcessor;
     private readonly commandsMap;
-    private readonly boardConfig: BoardConfiguration;
+    private readonly placementProc: PlacementProcessor;
 
     constructor(repository: IRepository) {
         super();
         this.repository = repository;
         this.sideHelper = new SideHelper();
-        this.boardConfig = new BoardConfiguration();
         this.moveCalculator = new MoveCalculator(new BoardConfiguration());
         this.placementProc = new PlacementProcessor(new BoardConfiguration());
         this.commandsMap = new Map<Commands, BoardSides>();
-        this.commandsMap[Commands.PLACE] = place;
+        this.commandsMap[Commands.PLACE] = this.placementProc.place;
         this.commandsMap[Commands.MOVE] = this.moveCalculator.move;
         this.commandsMap[Commands.LEFT] = this.sideHelper.Left;
         this.commandsMap[Commands.RIGHT] = this.sideHelper.Right;
