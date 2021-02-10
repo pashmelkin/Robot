@@ -9,13 +9,13 @@ const correctLocation = new RobotLocation(1, 2, BoardSides.SOUTH);
 const correctLocationStr = '1,2,SOUTH';
 
 describe("'Processor returns error if no Place command initially issued", () => {
-    test.each(actCommands)('returns error if %s and no Place commandName initially issued', (command) => {
+    test.each(actCommands)('returns error if %s and no Place command initially issued', (command) => {
         const processor = new Processor(undefined);
         const t = () => {
             processor.process(command);
         };
         expect(t).toThrow(Error);
-        expect(t).toThrow(`Not ready to process the command. Please put the ${Commands.PLACE} commandName first.`);
+        expect(t).toThrow(`Not ready to process the command. Please put the ${Commands.PLACE} command first.`);
     });
     it('process returns error if unknown command issued', function () {
         const repo = new Repository(correctLocation);
@@ -35,7 +35,7 @@ describe('Processor', function () {
         const result = processor.process(Commands.REPORT);
         expect(result).toBe(correctLocationStr);
     });
-    it('process function returns correct location after correct place commandName', function () {
+    it('process function returns correct location after correct place command', function () {
         const repo = new Repository(undefined);
         const processor = new Processor(repo);
         processor.process('PLACE 1,2,SOUTH');

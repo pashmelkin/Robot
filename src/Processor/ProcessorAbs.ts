@@ -14,7 +14,7 @@ export abstract class ProcessorAbs implements IProcessor {
     report(): string {
         const location = this.getLocation();
         if (location === undefined)
-            throw new Error(`Not ready to process the command. Please put the ${Commands.PLACE} commandName first.`);
+            throw new Error(`Not ready to process the command. Please put the ${Commands.PLACE} command first.`);
         const destination: string = BoardSides[location?.direction];
         return `${location?.x},${location?.y},${destination}`;
     }

@@ -44,7 +44,7 @@ export class Processor extends ProcessorAbs {
         const commandName = params[0];
         //Move it?
         if (currLocation === undefined && commandName !== Commands.PLACE) {
-            throw new Error(`Not ready to process the command. Please put the ${Commands.PLACE} commandName first.`);
+            throw new Error(`Not ready to process the command. Please put the ${Commands.PLACE} command first.`);
         }
 
         const f = this.commandsMap[commandName];

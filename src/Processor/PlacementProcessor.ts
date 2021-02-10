@@ -8,7 +8,7 @@ export class PlacementProcessor {
         this.boardSize = new BoardConfiguration();
     }
 
-    isPlacementLegimit(location: RobotLocation): boolean {
+    public isPlacementLegimit(location: RobotLocation): boolean {
         return !(
             location.x >= this.boardSize.width ||
             location.y >= this.boardSize.length ||
