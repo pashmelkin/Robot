@@ -7,6 +7,7 @@ export class MoveCalculator {
 
     constructor(board: BoardConfiguration) {
         this.boardSize = board;
+        this.move = this.move.bind(this);
     }
 
     move(location: RobotLocation): RobotLocation {
@@ -14,11 +15,11 @@ export class MoveCalculator {
 
         if (location.direction === BoardSides.EAST && location.x < this.boardSize.width - 1) {
             newLocation.x++;
-        } else if (location.direction === BoardSides.WEST && location.x > 1) {
+        } else if (location.direction === BoardSides.WEST && location.x >= 1) {
             newLocation.x--;
         } else if (location.direction === BoardSides.NORTH && location.y < this.boardSize.length - 1) {
             newLocation.y++;
-        } else if (location.direction === BoardSides.SOUTH && location.y > 1) {
+        } else if (location.direction === BoardSides.SOUTH && location.y >= 1) {
             newLocation.y--;
         } else throw new Error('Robot will fall off the board.');
         return location;
