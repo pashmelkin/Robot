@@ -20,8 +20,9 @@ export class RobotProcessor extends Processor {
         super();
         this.repository = repository;
         this.sideHelper = new SideHelper();
-        this.moveCalculator = new MoveCalculator(new BoardConfiguration());
-        this.placementProc = new PlacementProcessor(new BoardConfiguration());
+        const board = new BoardConfiguration();
+        this.moveCalculator = new MoveCalculator(board);
+        this.placementProc = new PlacementProcessor(board);
         this.commandsMap = new Map<Commands, BoardSides>();
         this.commandsMap[Commands.PLACE] = this.placementProc.place;
         this.commandsMap[Commands.MOVE] = this.moveCalculator.move;
