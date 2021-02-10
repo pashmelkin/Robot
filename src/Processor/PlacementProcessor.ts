@@ -7,6 +7,7 @@ export class PlacementProcessor implements IPlacementProcessor {
 
     constructor(board: BoardConfiguration) {
         this.boardSize = board;
+        this.place = this.place.bind(this);
     }
 
     isPlacementLegimit = (location: RobotLocation) =>
