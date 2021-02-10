@@ -14,7 +14,8 @@ const moves = [
     [new RobotLocation(0, 0, BoardSides.NORTH), new RobotLocation(0, 1, BoardSides.NORTH)],
     [new RobotLocation(0, maxY, BoardSides.NORTH), new RobotLocation(0, maxY, BoardSides.NORTH)],
     [new RobotLocation(maxX, 0, BoardSides.EAST), new RobotLocation(maxX, 0, BoardSides.EAST)],
-    [new RobotLocation(1, 4, BoardSides.WEST), new RobotLocation(0, 4, BoardSides.WEST)],
+    [new RobotLocation(1, maxY, BoardSides.WEST), new RobotLocation(0, maxY, BoardSides.WEST)],
+    [new RobotLocation(maxX, maxY, BoardSides.EAST), new RobotLocation(maxX, maxY, BoardSides.WEST)],
 ];
 
 let moveCalculator: MoveCalculator;

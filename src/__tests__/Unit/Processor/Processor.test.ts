@@ -1,4 +1,4 @@
-import { Processor } from '../../../Processor/Processor';
+import { RobotProcessor } from '../../../Processor/RobotProcessor';
 import { RobotLocation } from '../../../models/RobotLocation';
 import { BoardSides } from '../../../models/BoardSides';
 import { Repository } from '../../../Repository/Repository';
@@ -8,9 +8,9 @@ const actCommands = [Commands.LEFT, Commands.RIGHT, Commands.REPORT, Commands.MO
 const correctLocation = new RobotLocation(1, 2, BoardSides.SOUTH);
 const correctLocationStr = '1,2,SOUTH';
 
-describe("'Processor returns error if no Place command initially issued", () => {
+describe("'RobotProcessor returns error if no Place command initially issued", () => {
     test.each(actCommands)('returns error if %s and no Place command initially issued', (command) => {
-        const processor = new Processor(undefined);
+        const processor = new RobotProcessor(undefined);
         const t = () => {
             processor.process(command);
         };
@@ -19,7 +19,7 @@ describe("'Processor returns error if no Place command initially issued", () => 
     });
     it('process returns error if unknown command issued', function () {
         const repo = new Repository(correctLocation);
-        const processor = new Processor(repo);
+        const processor = new RobotProcessor(repo);
         const t = () => {
             processor.process('HELLO_ROBOT');
         };
@@ -28,26 +28,26 @@ describe("'Processor returns error if no Place command initially issued", () => 
     });
 });
 
-describe('Processor', function () {
+describe('RobotProcessor', function () {
     it('process with Report command returns correct location after correct place command', function () {
         const repo = new Repository(correctLocation);
-        const processor = new Processor(repo);
+        const processor = new RobotProcessor(repo);
         const result = processor.process(Commands.REPORT);
         expect(result).toBe(correctLocationStr);
     });
     it('process function returns correct location after correct place command', function () {
         const repo = new Repository(undefined);
-        const processor = new Processor(repo);
+        const processor = new RobotProcessor(repo);
         processor.process('PLACE 1,2,SOUTH');
         const result = processor.process(Commands.REPORT);
         expect(result).toBe(correctLocationStr);
     });
 });
 
-describe('Processor commands: MOVE', function () {
+describe('RobotProcessor commands: MOVE', function () {
     it('process with Move command returns correct new location', function () {
         const repo = new Repository(correctLocation);
-        const processor = new Processor(repo);
+        const processor = new RobotProcessor(repo);
         processor.process(Commands.MOVE);
 
         const result = processor.process(Commands.REPORT);
@@ -56,7 +56,7 @@ describe('Processor commands: MOVE', function () {
     });
     it('process with Left command returns correct new location', function () {
         const repo = new Repository(undefined);
-        const processor = new Processor(repo);
+        const processor = new RobotProcessor(repo);
         processor.process('PLACE 1,2,NORTH');
         processor.process(Commands.LEFT);
 
@@ -66,7 +66,7 @@ describe('Processor commands: MOVE', function () {
     });
     it('process with Right command returns correct new location', function () {
         const repo = new Repository(undefined);
-        const processor = new Processor(repo);
+        const processor = new RobotProcessor(repo);
         processor.process('PLACE 1,2,NORTH');
         processor.process(Commands.RIGHT);
 
