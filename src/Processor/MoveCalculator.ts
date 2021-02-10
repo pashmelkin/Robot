@@ -11,6 +11,7 @@ export class MoveCalculator {
 
     move(location: RobotLocation): RobotLocation {
         const newLocation: RobotLocation = location;
+
         if (location.direction === BoardSides.EAST && location.x < this.boardSize.width - 1) {
             newLocation.x++;
         } else if (location.direction === BoardSides.WEST && location.x > 1) {

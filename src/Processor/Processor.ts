@@ -6,12 +6,14 @@ import { SideHelper } from '../Configuration/SideHelper';
 import { MoveCalculator } from './MoveCalculator';
 import { PlacementProcessor } from './PlacementProcessor';
 import { ProcessorAbs } from './ProcessorAbs';
+import { place } from './Place';
 
 export class Processor extends ProcessorAbs {
     repository: IRepository;
     sideHelper: SideHelper;
     moveCalculator: MoveCalculator;
     placementProc: PlacementProcessor;
+    private readonly commandsMap;
 
     constructor(repository: IRepository) {
         super();
@@ -19,39 +21,40 @@ export class Processor extends ProcessorAbs {
         this.sideHelper = new SideHelper();
         this.moveCalculator = new MoveCalculator();
         this.placementProc = new PlacementProcessor();
+        this.commandsMap = new Map<Commands, BoardSides>();
+        this.commandsMap[Commands.PLACE] = place;
+        this.commandsMap[Commands.MOVE] = this.moveCalculator.move;
+        this.commandsMap[Commands.LEFT] = this.moveCalculator.move;
+        this.commandsMap[Commands.RIGHT] = this.moveCalculator.move;
     }
+
     getLocation = (): RobotLocation => this.repository?.GetLocation();
 
-    public moveRobot(command: string) {
+    public moveRobot(command: string): string | undefined {
         const currLocation = this.getLocation();
         const currDirection = currLocation?.direction;
         const currX = currLocation?.x; /// add coordinates type
         const currY = currLocation?.y;
 
-        let newDirection = currDirection;
-        let newX = currX;
-        let newY = currY;
+        const newDirection = currDirection;
+        const newX = currX;
+        const newY = currY;
 
         const params = command.split(/[ ,]+/);
         const commandName = params[0];
+        //Move it?
         if (currLocation === undefined && commandName !== Commands.PLACE) {
-            throw new Error('Not ready to move. Please put the Place commandName first.');
+            throw new Error(`Not ready to process the command. Please put the ${Commands.PLACE} commandName first.`);
         }
 
-        switch (commandName) {
-            case Commands.PLACE: {
-                const x = parseInt(params[1]);
-                if (isNaN(x)) return `Wrong Place command parameter: ${params[1]}`;
-                const y = parseInt(params[2]);
-                if (isNaN(y)) return `Wrong Place command parameter: ${params[2]}`;
-                const direction = BoardSides[params[3]];
+        const f = this.commandsMap[commandName];
+        if (typeof f === 'undefined') throw new Error(`Processor: Unknown command ${commandName} received`);
 
-                if (this.moveCalculator.isPlacementLegimit(new RobotLocation(x, y, direction))) {
-                    newX = x;
-                    newY = y;
-                    newDirection = direction;
-                } else return 'Wrong Place commandName parameters.';
-                x;
+        const newLocation = f(new RobotLocation(parseInt(params[1]), parseInt(params[2]), BoardSides[params[3]]));
+
+        /*        switch (commandName) {
+            case Commands.PLACE: {
+
                 break;
             }
             case Commands.LEFT:
@@ -59,7 +62,7 @@ export class Processor extends ProcessorAbs {
                 /* const sideRes = this.sideHelper.GetNextSide(Commands.LEFT, currDirection);
                 if (sideRes.error === undefined) {
                     newDirection = sideRes.side;
-                }*/
+                }
                 break;
             }
             case Commands.MOVE:
@@ -74,19 +77,13 @@ export class Processor extends ProcessorAbs {
                     }
                 }
                 break;
-            case Commands.REPORT: {
-                const destination: string = BoardSides[currLocation.direction];
-                return `${currLocation.x} ${currLocation.y} ${destination}`;
-                break;
-            }
             default: {
                 return 'Processor: Unknown commandName received';
                 break;
             }
         }
-
-        this.repository.SetLocation(new RobotLocation(newX, newY, newDirection));
-
+*/
+        this.repository.SetLocation(newLocation);
         return;
     }
 }
